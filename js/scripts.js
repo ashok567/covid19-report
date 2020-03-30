@@ -2,6 +2,11 @@ var state_data = []
 var table_index = {'start_index': 0, 'end_index': 10}
 var table_tmplt = _.template($("#state-table").html());
 
+$(window).on('load', function (){
+    $('.loader').fadeOut('slow')
+    $('.wrapper').removeClass('d-none')
+})
+
 function initialize(){
     $('.prev-btn').addClass('op-0')
     $.get('/state_wise', function(res){
@@ -20,6 +25,7 @@ function renderTable(data){
 }
 
 $(document).ready(function(){
+    $('.loader').show()
     initialize()
 })
 
