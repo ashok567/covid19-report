@@ -2,11 +2,17 @@ from tornado.web import RequestHandler, Application
 import tornado.ioloop
 import os
 import json
+import etl
 
 
 class MainHandler(RequestHandler):
     def get(self):
         self.render("index.html")
+
+class StatewiseHandler(RequestHandler):
+    def get(self):
+        res = etl.statewise_count()
+        self.write({'response': json.loads(res)})
 
 
 settings = dict(
@@ -20,8 +26,9 @@ def make_app():
     return Application(
         [
         (r'/', MainHandler),
-            (r'/(.*)', tornado.web.StaticFileHandler,
-             {"path": ""})], **settings)
+        (r'/state_wise', StatewiseHandler),
+        (r'/(.*)', tornado.web.StaticFileHandler,
+            {"path": ""})], **settings)
 
 
 port = 9005

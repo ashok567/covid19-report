@@ -9,9 +9,10 @@ with open('config.yml', 'r') as config_file:
     except yaml.YAMLError as exc:
         print(exc)
 
-response = requests.get(config['url'])
-data = response.content
-df1 = pd.read_excel(BytesIO(data), sheet_name='Raw_Data', encoding='utf-8')
-# print(df1.head())
-df2 = pd.read_excel(BytesIO(data), sheet_name='Statewise', encoding='utf-8')
-print(df2.head())
+def statewise_count():
+    response = requests.get(config['url'])
+    data = response.content
+    # df1 = pd.read_excel(BytesIO(data), sheet_name='Raw_Data', encoding='utf-8')
+    statewise_df = pd.read_excel(BytesIO(data), sheet_name='Statewise', encoding='utf-8')
+    statewise_df = statewise_df.to_json(orient='records')
+    return statewise_df

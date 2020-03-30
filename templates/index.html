@@ -10,8 +10,9 @@
 
   <title>TestApp</title>
 
-  <link href="./assets/css/bootstrap.min.css" rel="stylesheet">
-  <link href="./assets/css/bootstrap-theme.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/todc-bootstrap/3.4.0-3.4.1/css/bootstrap-theme.min.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
   <link href="./assets/css/style.css" rel="stylesheet">
   <link href="./assets/css/style-responsive.css" rel="stylesheet" />
 </head>
@@ -28,11 +29,12 @@
     <section id="main-content">
       <section class="wrapper">
         <!--overview start-->
-        <div class="row">
+        <div class="row" id="overview">
+          <script type="text/html" id="overview-sc">
           <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
             <div class="info-box facebook-bg">
-              <div class="count">674</div>
-              <div class="title">Total</div>
+              <div class="count"><%=overview['Confirmed']%></div>
+              <div class="title">Confirmed</div>
             </div>
             <!--/.info-box-->
           </div>
@@ -40,8 +42,8 @@
 
           <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
             <div class="info-box yellow-bg">
-              <div class="count">538</div>
-              <div class="title">Recovered</div>
+              <div class="count"><%=overview['Active']%></div>
+              <div class="title">Active</div>
             </div>
             <!--/.info-box-->
           </div>
@@ -49,8 +51,8 @@
 
           <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
             <div class="info-box green-bg">
-              <div class="count">436</div>
-              <div class="title">Order</div>
+              <div class="count"><%=overview['Recovered']%></div>
+              <div class="title">Recovered</div>
             </div>
             <!--/.info-box-->
           </div>
@@ -58,13 +60,13 @@
 
           <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
             <div class="info-box red-bg">
-              <div class="count">26</div>
+              <div class="count"><%=overview['Deaths']%></div>
               <div class="title">Fatal</div>
             </div>
             <!--/.info-box-->
           </div>
           <!--/.col-->
-
+          </script>
         </div>
         <!--/.row-->
         <!--overview end-->
@@ -73,7 +75,7 @@
           <div class="col-lg-7 col-md-12">
             <div class="panel panel-default">
               <div class="panel-heading">
-                <h2><strong>Countries</strong></h2>
+                <h2><i class="fa fa-map-marker red"></i><strong>Distribution</strong></h2>
               </div>
               <div class="panel-body-map">
                 <div id="map" style="height:380px;"></div>
@@ -85,21 +87,29 @@
           <div class="col-md-5">
             <div class="panel panel-default">
               <div class="panel-heading">
-                <h2><strong>Registered Users</strong></h2>
+                <h2><strong>States</strong></h2>
+                <div class="panel-actions">
+                  <a href="index.html#" class="btn-setting"><i class="fa fa-rotate-right"></i></a>
+                </div>
               </div>
+              <!-- <script type="text/html" id="state-table"> -->
               <div class="panel-body">
                 <table class="table bootstrap-datatable countries">
                   <thead>
                     <tr>
-                      <th>Country</th>
-                      <th>Users</th>
-                      <th>Online</th>
+                      <th>State</th>
+                      <th>Confirmed</th>
+                      <th>Active</th>
+                      <th>Recovered</th>
+                      <th>Fatal</th>
                       <th>Performance</th>
                     </tr>
                   </thead>
                   <tbody>
                     <tr>
-                      <td>Germany</td>
+                      <td>Maharashtra</td>
+                      <td>2563</td>
+                      <td>1025</td>
                       <td>2563</td>
                       <td>1025</td>
                       <td>
@@ -115,6 +125,7 @@
                   </tbody>
                 </table>
               </div>
+              <!-- </script> -->
             </div>
           </div>
         </div>
@@ -130,8 +141,10 @@
   <!-- container section start -->
 
   <!-- javascripts -->
-  <script src="js/jquery.js"></script>
-  <script src="js/bootstrap.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.11/lodash.min.js"></script>
   <script src="js/scripts.js"></script>
 </body>
 </html>
