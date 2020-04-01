@@ -3804,9 +3804,14 @@ div[data-role="editor-toolbar"] {
 .task-thumb-details p, .task-progress p {
 
     padding-top: 5px;
-
     color: #fed189;
 
+}
+
+
+.progress {
+  height: 14px !important;
+  border-radius: 0px !important;
 }
 
 
