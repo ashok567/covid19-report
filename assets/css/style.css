@@ -9841,8 +9841,8 @@ span.customSelect {
 }
 
 .op-0{
-    opacity: 0.2;
-    pointer-events:none;
+    opacity: 0.2 !important;
+    pointer-events:none !important;
 }
 
 .loading-image {
