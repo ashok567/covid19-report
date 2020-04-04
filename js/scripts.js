@@ -1,6 +1,9 @@
+/* global draw_pie, draw_bar */
 var state_data = []
 var table_index = {'start_index': 0, 'end_index': 10}
 var table_tmplt = _.template($("#state-table").html());
+var pie_tmplt = _.template($("#pie-script").html());
+var bar_tmplt = _.template($("#bar-script").html());
 
 $(window).on('load', function (){
     $('.loader').fadeOut('slow')
@@ -15,6 +18,8 @@ function initialize(){
         state_data = _.orderBy(res.response.splice(1), ['Confirmed'], ['desc'])
         renderTable(state_data.slice(table_index['start_index'], table_index['end_index']))
         $('#prev-btn').addClass('op-0')
+        renderPie()
+        renderBar()
     })
 }
 
@@ -22,6 +27,20 @@ function renderTable(data){
     $(".countries").empty()
     var table_html = table_tmplt({ table_data: data });
     $(".countries").html(table_html);
+}
+
+function renderPie(){
+  $("#pie-section").empty()
+  var pie_html = pie_tmplt();
+  $("#pie-section").html(pie_html);
+  draw_pie()
+}
+
+function renderBar(){
+  $("#bar-section").empty()
+  var bar_html = bar_tmplt();
+  $("#bar-section").html(bar_html);
+  draw_bar()
 }
 
 $(document).ready(function(){
