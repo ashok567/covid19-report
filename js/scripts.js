@@ -25,7 +25,7 @@ function initialize(){
 
 function renderTable(data){
     $(".countries").empty()
-    var table_html = table_tmplt({ table_data: data });
+    var table_html = table_tmplt({ table_data: data, max_confirmed: data[0]['Confirmed'] });
     $(".countries").html(table_html);
 }
 

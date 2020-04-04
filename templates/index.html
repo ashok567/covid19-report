@@ -120,7 +120,13 @@
                       <% _.each(table_data, function(d){ %>
                       <tr>
                         <td><%=d['State']%></td>
-                        <td><%=d['Confirmed']%></td>
+                        <!-- <td><%=d['Confirmed']%></td> -->
+                        <td class="td-bar">
+                          <div class="progress">
+                            <div class="facebook-bg" style="width: <%=(d['Confirmed']/max_confirmed)*100%>%">
+                            </div>
+                          </div>
+                        </td>
                         <td><%=d['Active']%></td>
                         <td><%=d['Recovered']%></td>
                         <td><%=d['Deaths']%></td>

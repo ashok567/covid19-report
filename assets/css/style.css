@@ -1417,13 +1417,13 @@ div[data-role="editor-toolbar"] {
 
 
 
-.dropdown-menu.extended .progress {
+/* .dropdown-menu.extended .progress {
 
     margin-bottom: 0 !important;
 
     height: 10px;
 
-}
+} */
 
 
 
@@ -3777,15 +3777,15 @@ div[data-role="editor-toolbar"] {
 
 
 
-.task-progress {
+/* .task-progress {
 
     float: left;
 
-}
+} */
 
 
 
-.task-thumb-details h1, .task-thumb-details h1 a, .task-progress h1, .task-progress h1 a {
+/* .task-thumb-details h1, .task-thumb-details h1 a, .task-progress h1, .task-progress h1 a {
 
     color: #688a7e;
 
@@ -3797,25 +3797,31 @@ div[data-role="editor-toolbar"] {
 
     font-weight: 300;
 
-}
+} */
 
 
 
-.task-thumb-details p, .task-progress p {
+/* .task-thumb-details p, .task-progress p {
 
     padding-top: 5px;
     color: #fed189;
 
-}
+} */
 
 
 .progress {
-  height: 14px !important;
-  border-radius: 0px !important;
+  margin-top: 5px;
+  height: 10px;
+  /* border-radius: 0px !important; */
 }
 
+/* .progress-xs {
+  height: 8px;
+}
 
-
+.progress-sm {
+  height: 12px;
+} */
 
 
 .personal-task tbody tr td{
@@ -3896,11 +3902,11 @@ div[data-role="editor-toolbar"] {
 
 
 
-.progress-panel {
+/* .progress-panel {
 
     padding-bottom: 5px;
 
-}
+} */
 
 
 
@@ -5064,11 +5070,11 @@ ul.ft-link li a i {
 
 
 
-.project-team, .panel-title,.progress-panel{
+/* .project-team, .panel-title,.progress-panel{
 
     background: #F7F7F7;
 
-}
+} */
 
 .profile-ava img{
 
@@ -7661,23 +7667,6 @@ ul.amounts li {
 
 
 /*general page*/
-
-
-
-.progress-xs {
-
-    height: 8px;
-
-}
-
-
-
-.progress-sm {
-
-    height: 12px;
-
-}
-
 
 
 .panel-heading .nav {
