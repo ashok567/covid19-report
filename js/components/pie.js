@@ -20,7 +20,7 @@ function draw_pie(){
 
   var color = d3.scaleOrdinal()
     .domain(data)
-    .range(['green', 'blue', 'gray', 'red']);
+    .range(['#FCB322', '#3b5998', '#26c281', '#d95043']);
 
   var data_sum = d3.sum(d3.values(data))
 

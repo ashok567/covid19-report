@@ -100,7 +100,7 @@ function draw_bar(){
     .attr("y", function(d){ return  yBar(d.bar);})
     .attr("height", function(d){ return height - yBar(d.bar); });
 
-  line_colors = ['green', 'blue', 'gray', 'red']
+  line_colors = ['#FCB322', '#3b5998', '#26c281', '#d95043']
 
   _.each([0,1,2,3], function(i){
     // define the 1st line
