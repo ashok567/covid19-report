@@ -3812,17 +3812,12 @@ div[data-role="editor-toolbar"] {
 .progress {
   margin-top: 5px;
   height: 10px;
-  /* border-radius: 0px !important; */
+  border-radius: 0px;
 }
 
-/* .progress-xs {
-  height: 8px;
+.td-bar{
+  font-size: 10px;
 }
-
-.progress-sm {
-  height: 12px;
-} */
-
 
 .personal-task tbody tr td{
 
