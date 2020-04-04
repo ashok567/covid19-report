@@ -9838,3 +9838,14 @@ span.customSelect {
 a{
     cursor: pointer !important;
 }
+
+.states{
+  fill: #fff;
+  stroke: #000;
+}
+
+.state-borders {
+  fill: none;
+  stroke: #000;
+  stroke-width: 0.7px;
+}

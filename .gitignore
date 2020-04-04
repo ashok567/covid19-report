@@ -22,9 +22,11 @@ config.yml
 
 # Data files. Try not to commit data into the repo
 data/
+assets/img/maps/
 *.csv
 *.dat
 *.mdb
+*.json
 
 # Zip files that aren't read by Pandas
 *.7z
