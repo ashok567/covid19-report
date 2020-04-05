@@ -96,7 +96,7 @@ function draw_bar(){
     .style("fill", "#ccc")
     .style("opacity", 0.4)
     .attr("x", function(d){ return xBar(d.date); })
-    .attr("width", 40)
+    .attr("width", xBar.bandwidth())
     .attr("y", function(d){ return  yBar(d.bar);})
     .attr("height", function(d){ return height - yBar(d.bar); });
 
