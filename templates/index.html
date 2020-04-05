@@ -13,8 +13,8 @@
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/todc-bootstrap/3.4.0-3.4.1/css/bootstrap-theme.min.css">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-  <link href="./assets/css/style.css" rel="stylesheet">
-  <link href="./assets/css/style-responsive.css" rel="stylesheet" />
+  <link rel="stylesheet" href="./assets/css/style.css">
+  <link  rel="stylesheet" href="./assets/css/style-responsive.css">
 </head>
 
 <body>
@@ -34,36 +34,36 @@
         <div class="row" id="overview">
           <script type="text/html" id="overview-sc">
           <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
-            <div class="info-box facebook-bg">
-              <div class="count"><%=overview['Confirmed']%></div>
-              <div class="title">Confirmed</div>
+            <div class="info-box white-bg">
+              <div class="count facebook-color"><%=overview['Confirmed']%><span class="badge facebook-bg">+1000</span></div>
+              <div class="title facebook-color">Confirmed</div>
             </div>
             <!--/.info-box-->
           </div>
           <!--/.col-->
 
           <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
-            <div class="info-box yellow-bg">
-              <div class="count"><%=overview['Active']%></div>
-              <div class="title">Active</div>
+            <div class="info-box white-bg">
+              <div class="count yellow-color"><%=overview['Active']%><span class="badge yellow-bg">+1000</span></div>
+              <div class="title yellow-color">Active</div>
             </div>
             <!--/.info-box-->
           </div>
           <!--/.col-->
 
           <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
-            <div class="info-box green-bg">
-              <div class="count"><%=overview['Recovered']%></div>
-              <div class="title">Recovered</div>
+            <div class="info-box white-bg">
+              <div class="count green-color"><%=overview['Recovered']%><span class="badge green-bg">+1000</span></div>
+              <div class="title green-color">Recovered</div>
             </div>
             <!--/.info-box-->
           </div>
           <!--/.col-->
 
           <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
-            <div class="info-box red-bg">
-              <div class="count"><%=overview['Deaths']%></div>
-              <div class="title">Fatal</div>
+            <div class="info-box white-bg">
+              <div class="count red-color"><%=overview['Deaths']%><span class="badge red-bg">+1000</span></div>
+              <div class="title red-color">Fatal</div>
             </div>
             <!--/.info-box-->
           </div>

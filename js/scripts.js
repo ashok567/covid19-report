@@ -31,17 +31,17 @@ function renderTable(data){
 }
 
 function renderPie(){
-  $("#pie-section").empty()
-  var pie_html = pie_tmplt();
-  $("#pie-section").html(pie_html);
-  draw_pie()
+    $("#pie-section").empty()
+    var pie_html = pie_tmplt();
+    $("#pie-section").html(pie_html);
+    draw_pie()
 }
 
 function renderBar(){
-  $("#bar-section").empty()
-  var bar_html = bar_tmplt();
-  $("#bar-section").html(bar_html);
-  draw_bar()
+    $("#bar-section").empty()
+    var bar_html = bar_tmplt();
+    $("#bar-section").html(bar_html);
+    draw_bar()
 }
 
 $(document).ready(function(){

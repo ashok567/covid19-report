@@ -9825,8 +9825,8 @@ span.customSelect {
 }
 
 .op-0{
-    opacity: 0.2 !important;
-    pointer-events:none !important;
+  opacity: 0.2 !important;
+  pointer-events:none !important;
 }
 
 .pie{
@@ -9834,13 +9834,13 @@ span.customSelect {
 }
 
 .loading-image {
-    position: absolute;
-    top: 50%;
-    left: 50%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
 }
 
 a{
-    cursor: pointer !important;
+  cursor: pointer !important;
 }
 
 .states{
@@ -9852,4 +9852,26 @@ a{
   fill: none;
   stroke: #000;
   stroke-width: 0.7px;
+}
+
+.red-color{
+  color : #d95043;
+}
+
+.facebook-color{
+  color : #3b5998;
+}
+
+.green-color{
+  color : #26c281;
+}
+
+.yellow-color{
+  color : #fc6;
+}
+
+.badge{
+  font-size: 12px;
+  opacity: 0.8;
+  margin-left: 5px;
 }
