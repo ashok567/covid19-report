@@ -9829,6 +9829,10 @@ span.customSelect {
     pointer-events:none !important;
 }
 
+.pie{
+  cursor: pointer;
+}
+
 .loading-image {
     position: absolute;
     top: 50%;

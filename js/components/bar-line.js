@@ -100,7 +100,7 @@ function draw_bar(){
     .attr("y", function(d){ return  yBar(d.bar);})
     .attr("height", function(d){ return height - yBar(d.bar); });
 
-  line_colors = ['#FCB322', '#3b5998', '#26c281', '#d95043']
+  line_colors = ['#FCB322', '#d95043', '#26c281', '#3b5998']
 
   _.each([0,1,2,3], function(i){
     // define the 1st line
@@ -111,25 +111,28 @@ function draw_bar(){
     // Add the valueline path.
     svg.append("path")
         .data([data])
-        .attr("class", "line")
+        .attr("class", `line${i}`)
         .style("stroke", line_colors[i])
+        .style("stroke-width", '2px')
         .attr("d", valueline)
         .attr("fill", "none");
 
-    var points = svg.selectAll(`circle.point${i+1}`)
+    var points = svg.selectAll(`circle.point${i}`)
     .data(data)
 
     points.enter().append("circle")
-        .attr("class", `point${i+1}`)
-        .style("stroke", line_colors[i])
+        .attr("class", `point${i}`)
+        .style("stroke", '#fff')
+        .style("stroke-width", "1px")
         .style("fill", line_colors[i])
         .attr("cx", function(d){ return xLine(d[`date`]); })
         .attr("cy", function(d){ return yLine(d[`line${i+1}`]); })
-        .attr("r", function(d){ return 2; });
+        .attr("r", "3px");
   })
 
   // Add the X Axis
   svg.append("g")
+      .attr("class", "xaxis")
       .attr("transform", "translate(0," + height + ")")
       .call(d3.axisBottom(xLine).tickFormat(d3.timeFormat('%b')).tickSize(0).tickPadding(8));
 
@@ -146,9 +149,9 @@ function draw_bar(){
 
   svg.append('text')
       .attr('class', 'lineaxis label')
-      .attr('text-anchor', 'end')
-      .attr('x', -400)
-      .attr('y', -40)
+      .attr('text-anchor', 'middle')
+      .attr('x', -height/2)
+      .attr('y', -margin.right)
       .attr('font-size', '12px')
       // .attr('dy', '.35em')
       .attr('transform', 'rotate(-90)')
@@ -156,16 +159,25 @@ function draw_bar(){
 
   svg.append('text')
       .attr('class', 'baraxis label')
-      .attr('text-anchor', 'end')
-      .attr('x', -400)
-      .attr('y', 40)
+      .attr('text-anchor', 'middle')
+      .attr('x', -height/2)
+      .attr('y', width+margin.right)
       .attr('font-size', '12px')
+      .style('fill', '#797979')
       // .attr('dy', '.35em')
       .attr('transform', 'rotate(-90)')
       .text('Count');
 
+  svg.selectAll('.lineaxis text')
+  .style('fill', '#000')
+
+  svg.selectAll('.xaxis text')
+  .style('fill', '#000')
+  .style('font-size', '12px')
+
   svg.selectAll('path.domain')
   .style('stroke', 'none')
+
 
   d3.selectAll('.lineaxis .tick').each(function(d) {
     d3.select(this).select("line").style("stroke-dasharray", function() {

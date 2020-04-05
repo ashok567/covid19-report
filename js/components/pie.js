@@ -45,6 +45,8 @@ function draw_pie(){
     .enter()
     .append('path')
     .attr('d', arcGenerator)
+    .attr('class', 'pie')
+    .on('click', (d) => pieOnClick(d.index))
     .attr('fill', function(d){ return(color(d.data.key)) })
     .attr("stroke", "#fff")
     .style("stroke-width", "1px")
@@ -55,6 +57,8 @@ function draw_pie(){
     .data(data_ready)
     .enter()
     .append("text")
+    .attr('class', 'pie')
+    .on('click', (d) => pieOnClick(d.index))
     .text(function(d){
       return parseInt((d.data.value/data_sum)*100)+"%"
     })
@@ -68,6 +72,8 @@ function draw_pie(){
     .data(data_ready)
     .enter()
     .append("text")
+    .attr('class', 'pie')
+    .on('click', (d) => pieOnClick(d.index))
     .attr("dy", "1.2em")
     .text(function(d){
       return "("+d.data.value+")"
@@ -120,4 +126,14 @@ function draw_pie(){
 
 function midAngle(d) {
   return d.startAngle + (d.endAngle - d.startAngle) / 2;
+}
+
+function pieOnClick(sel_i){
+  console.log(sel_i)
+  _.each([0,1,2,3], function(i){
+    $(`.line${i}`).addClass('op-0');
+    $(`.point${i}`).addClass('op-0');
+  })
+  $(`.line${sel_i}`).removeClass('op-0');
+  $(`.point${sel_i}`).removeClass('op-0');
 }
