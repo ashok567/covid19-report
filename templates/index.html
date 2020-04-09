@@ -140,11 +140,11 @@
                             <div class="progress-bar red-bg" role="progressbar" aria-valuenow="<%=(d['Deaths']/d['Confirmed'])*100%>" aria-valuemin="0" aria-valuemax="100" style="width: <%=(d['Deaths']/d['Confirmed'])*100%>%">
                             </div>
                           </div>
-                          <!-- <div style="width: 100%;">
-                            <div style="width: <%=(d['Active']/d['Confirmed'])*100%>%"><%=d['Active']%></div>
-                            <div style="width: <%=(d['Recovered']/d['Confirmed'])*100%>%">1</div>
-                            <div style="width: <%=(d['Deaths']/d['Confirmed'])*100%>%">1</div>
-                          </div> -->
+                          <div class="row m-0">
+                              <span style="width: 33.33%;" class="text-center yellow-color"><%=d['Active']%></span>
+                              <span style="width: 33.33%;" class="text-center green-color"><%=d['Recovered']%></span>
+                              <span style="width: 33.33%;" class="text-center red-color"><%=d['Deaths']%></span>
+                          </div>
                         </td>
                       </tr>
                       <% }) %>
