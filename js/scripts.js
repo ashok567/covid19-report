@@ -26,7 +26,7 @@ function initialize(){
 
 function renderTable(data){
     $(".countries").empty()
-    var table_html = table_tmplt({ table_data: data, max_confirmed: data[0]['Confirmed'] });
+    var table_html = table_tmplt({ table_data: data, max_data: data[0] });
     $(".countries").html(table_html);
 }
 
@@ -54,7 +54,7 @@ $('body')
     $('#prev-btn').removeClass('op-0')
     table_index['start_index'] += 10
     table_index['end_index'] += 10
-    if(table_index['start_index']<state_data.length){
+      if(table_index['start_index']<state_data.length){
         if(table_index['end_index']>state_data.length) $('#next-btn').addClass('op-0')
         renderTable(state_data.slice(table_index['start_index'], table_index['end_index']))
     }
