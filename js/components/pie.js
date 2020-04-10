@@ -15,12 +15,12 @@ function draw_pie(){
     .append("g")
     .attr("transform", "translate(" + width/2 + "," + height/2 + ")");
 
-  var data = {"within 2 Days ": 1001, "3-4 days": 204, "More than 4 days": 212, "Not Entered":223}
+  var data = {"within 2 Days ": 1001, "More than 4 days": 212, "Not Entered":223}
 
 
   var color = d3.scaleOrdinal()
     .domain(data)
-    .range(['#FCB322', '#3b5998', '#26c281', '#d95043']);
+    .range(['#FCB322', '#26c281', '#d95043']);
 
   var data_sum = d3.sum(d3.values(data))
 
@@ -130,7 +130,7 @@ function midAngle(d) {
 
 function pieOnClick(sel_i){
   console.log(sel_i)
-  _.each([0,1,2,3], function(i){
+  _.each([0,1,2], function(i){
     $(`.line${i}`).addClass('op-0');
     $(`.point${i}`).addClass('op-0');
   })

@@ -5,48 +5,42 @@ var data = [
     "bar": 1640,
     "line1": 31,
     "line2": 12,
-    "line3": 21,
-    "line4": 32
+    "line3": 21
   },
   {
     "date": '2019-02-01',
     "bar": 1130,
     "line1": 23,
     "line2": 05,
-    "line3": 41,
-    "line4": 28
+    "line3": 41
   },
   {
     "date": '2019-03-01',
     "bar": 1190,
     "line1": 34,
     "line2": 12,
-    "line3": 32,
-    "line4": 34
+    "line3": 32
   },
   {
     "date": '2019-04-01',
     "bar": 1200,
     "line1": 21,
     "line2": 36,
-    "line3": 18,
-    "line4": 22
+    "line3": 18
   },
   {
     "date": '2019-05-01',
     "bar": 1000,
     "line1": 44,
     "line2": 21,
-    "line3": 31,
-    "line4": 32
+    "line3": 31
   },
   {
     "date": '2019-06-01',
     "bar": 1400,
     "line1": 41,
     "line2": 11,
-    "line3": 21,
-    "line4": 12
+    "line3": 21
   }
 ]
 
@@ -61,9 +55,6 @@ function draw_bar(){
 
   data.forEach(function(d) {
     d.date = parseTime(d.date);
-    d.bar = +d.bar;
-    d.line1 = +d.line1;
-    d.line2 = +d.line2;
   });
 
   // set the ranges
@@ -76,8 +67,8 @@ function draw_bar(){
   xBar.domain(data.map(function(d) { return d.date; }));
   // xBar.domain(d3.extent(data, (d) => d.date))
   xLine.domain(data.map(function(d) { return d.date; }));
-  yBar.domain([0, d3.max(data, function(d) { return d.bar; })]).nice();
-  yLine.domain([0, d3.max(data, function(d) {return Math.max(d.line1, d.line2, d.line3, d.line4); })]).nice();
+  yBar.domain([0, d3.max(data, function(d) { return d.bar; })]);
+  yLine.domain([0, d3.max(data, function(d) {return Math.max(d.line1, d.line2, d.line3); })]);
 
   var svg = d3.select("#bar_div").append("svg")
     // .attr("width", width + margin.left + margin.right)
@@ -100,9 +91,9 @@ function draw_bar(){
     .attr("y", function(d){ return  yBar(d.bar);})
     .attr("height", function(d){ return height - yBar(d.bar); });
 
-  line_colors = ['#FCB322', '#d95043', '#26c281', '#3b5998']
+  line_colors = ['#FCB322', '#d95043', '#26c281']
 
-  _.each([0,1,2,3], function(i){
+  _.each([0,1,2], function(i){
     // define the 1st line
     var valueline = d3.line()
         .x(function(d) { return xLine(d[`date`]); })
@@ -182,12 +173,6 @@ function draw_bar(){
   d3.selectAll('.lineaxis .tick').each(function(d) {
     d3.select(this).select("line").style("stroke-dasharray", function() {
       return d==0 ? '0':'5 5'
-    })
-    d3.select(this).select("line").style("stroke", function() {
-      return d==40 ? 'blue':''
-    })
-    d3.select(this).select("line").style("opacity", function() {
-      return d==40 ? 1:0.4
     })
   })
 }
