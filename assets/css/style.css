@@ -9875,3 +9875,7 @@ a{
   opacity: 0.8;
   margin-left: 5px;
 }
+
+.cursor-pointer {
+  cursor: pointer;
+}

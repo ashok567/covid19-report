@@ -1,6 +1,7 @@
 /* exported draw_map */
 
-function draw_map(data) {
+function draw_map(data, type) {
+  $("#ind-map").empty()
   var width = $("#ind-map").width(),
       height = 600;
 
@@ -20,7 +21,9 @@ function draw_map(data) {
 
   var map = svg.append("g").attr("class", "states")
 
-  var colorRamp = ['#fcfcfe','#3b5998'];
+  var map_color = {'Confirmed': '#263961', 'Active': '#ffb31a', 'Recovered': '#198256', 'Deaths':'#ad2f23'}
+
+  var colorRamp = ['#ffffff', map_color[type]];
 
   _.each(data, function(d){ rateById.set(d.State, +d.Confirmed) });
   var max = _.max(_.map(data, function(d){ return parseInt(d.Confirmed); }))

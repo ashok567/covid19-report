@@ -20,7 +20,7 @@ function initialize(){
         $('#prev-btn').addClass('op-0')
         renderPie()
         renderBar()
-        draw_map(state_data)
+        draw_map(state_data, 'Confirmed')
     })
 }
 
@@ -51,20 +51,25 @@ $(document).ready(function(){
 
 $('body')
 .on('click', '#next-btn', function(){
-    $('#prev-btn').removeClass('op-0')
-    table_index['start_index'] += 10
-    table_index['end_index'] += 10
-      if(table_index['start_index']<state_data.length){
-        if(table_index['end_index']>state_data.length) $('#next-btn').addClass('op-0')
-        renderTable(state_data.slice(table_index['start_index'], table_index['end_index']))
-    }
+  $('#prev-btn').removeClass('op-0')
+  table_index['start_index'] += 10
+  table_index['end_index'] += 10
+  if(table_index['start_index']<state_data.length){
+    if(table_index['end_index']>state_data.length) $('#next-btn').addClass('op-0')
+    renderTable(state_data.slice(table_index['start_index'], table_index['end_index']))
+  }
 })
 .on('click', '#prev-btn', function(){
-    $('#next-btn').removeClass('op-0')
-    table_index['start_index'] -= 10
-    table_index['end_index'] -= 10
-    if (table_index['start_index']>=0){
-        if(table_index['start_index']==0) $('#prev-btn').addClass('op-0')
-        renderTable(state_data.slice(table_index['start_index'], table_index['end_index']))
-    }
+  $('#next-btn').removeClass('op-0')
+  table_index['start_index'] -= 10
+  table_index['end_index'] -= 10
+  if (table_index['start_index']>=0){
+    if(table_index['start_index']==0) $('#prev-btn').addClass('op-0')
+    renderTable(state_data.slice(table_index['start_index'], table_index['end_index']))
+  }
+})
+.on('click', '.map-click', function(){
+  var selected_id = $(this).attr('id')
+  var map_state_data = _.orderBy(state_data, [selected_id], ['desc'])
+  draw_map(map_state_data, selected_id)
 })
