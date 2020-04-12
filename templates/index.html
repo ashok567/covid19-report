@@ -35,7 +35,7 @@
           <script type="text/html" id="overview-sc">
           <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 cursor-pointer map-click" id="Confirmed">
             <div class="info-box white-bg">
-              <div class="count facebook-color"><%=overview['Confirmed']%><span class="badge facebook-bg">+1000</span></div>
+              <div class="count facebook-color"><%=overview['Confirmed']%><span class="badge facebook-bg">+<%=overview['Delta_Confirmed']%></span></div>
               <div class="title facebook-color">Confirmed</div>
             </div>
             <!--/.info-box-->
@@ -44,7 +44,7 @@
 
           <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 cursor-pointer map-click" id="Active">
             <div class="info-box white-bg">
-              <div class="count yellow-color"><%=overview['Active']%><span class="badge yellow-bg">+1000</span></div>
+              <div class="count yellow-color"><%=overview['Active']%><span class="badge yellow-bg">+<%=overview['Delta_Confirmed']%></span></div>
               <div class="title yellow-color">Active</div>
             </div>
             <!--/.info-box-->
@@ -53,7 +53,7 @@
 
           <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 cursor-pointer map-click" id="Recovered">
             <div class="info-box white-bg">
-              <div class="count green-color"><%=overview['Recovered']%><span class="badge green-bg">+1000</span></div>
+              <div class="count green-color"><%=overview['Recovered']%><span class="badge green-bg">+<%=overview['Delta_Recovered']%></span></div>
               <div class="title green-color">Recovered</div>
             </div>
             <!--/.info-box-->
@@ -62,7 +62,7 @@
 
           <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 cursor-pointer map-click" id="Deaths">
             <div class="info-box white-bg">
-              <div class="count red-color"><%=overview['Deaths']%><span class="badge red-bg">+1000</span></div>
+              <div class="count red-color"><%=overview['Deaths']%><span class="badge red-bg">+<%=overview['Delta_Deaths']%></span></div>
               <div class="title red-color">Fatal</div>
             </div>
             <!--/.info-box-->
@@ -76,11 +76,6 @@
         <div class="card-deck my-3">
           <div class="card col-sm-12 col-md-5 px-0">
             <div class="card-body pb-0">
-              <!-- <div class="panel panel-default">
-                <div class="panel-heading">
-                  <h2><i class="fa fa-map-marker"></i><strong>Distribution</strong></h2>
-                </div>
-              </div> -->
               <!-- <div class="panel-body-map"> -->
                 <div id="ind-map"></div>
               <!-- </div> -->
@@ -90,15 +85,6 @@
 
           <div class="card col-sm-12 col-md-7 px-0" id="table-section">
             <div class="card-body pb-0 table-responsive">
-              <!-- <div class="panel panel-default">
-                <div class="panel-heading">
-                  <h2><i class="fa fa-location-arrow"></i><strong>States</strong></h2>
-                  <div class="panel-actions">
-                    <a class="prev-btn"><i class="fa fa-chevron-left"></i></a>
-                    <a class="next-btn"><i class="fa fa-chevron-right"></i></a>
-                  </div>
-                </div>
-              </div> -->
               <!-- <div class="panel-body"> -->
                 <table class="table">
                   <thead>
@@ -182,7 +168,10 @@
                 </div>
                 <div class="mt-3">
                   <div class="h2 font-weight-bold">1,640</div>
-                  <div id="pie_div"></div>
+                  <div class="row">
+                    <div class="col-sm-6 col-md-6" id="pie_div1"></div>
+                    <div class="col-sm-6 col-md-6" id="pie_div2"></div>
+                  </div>
                 </div>
               </script>
             </div>

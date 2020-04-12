@@ -1,13 +1,13 @@
 /* exported draw_pie */
-function draw_pie(){
-  var div_width = $("#pie_div").width()
+function draw_pie(ele){
+  var div_width = $(ele).width()
   var width = div_width
       height = 200
       margin = 20
 
   var radius = Math.min(width, height) / 2 - margin
 
-  var svg = d3.select("#pie_div")
+  var svg = d3.select(ele)
     .append("svg")
     // .attr("width", width)
     // .attr("height", height)
@@ -69,7 +69,6 @@ function draw_pie(){
 }
 
 function pieOnClick(sel_i){
-  console.log(sel_i)
   _.each([0,1,2], function(i){
     $(`.line${i}`).addClass('op-0');
     $(`.point${i}`).addClass('op-0');

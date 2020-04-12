@@ -32,7 +32,8 @@ function renderPie(){
   $("#pie-section").empty()
   var pie_html = pie_tmplt();
   $("#pie-section").html(pie_html);
-  draw_pie()
+  draw_pie("#pie_div1")
+  draw_pie("#pie_div2")
 }
 
 function renderBar(){
