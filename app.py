@@ -9,9 +9,16 @@ class MainHandler(RequestHandler):
     def get(self):
         self.render("index.html")
 
+
 class StatewiseHandler(RequestHandler):
     def get(self):
         res = etl.statewise_count()
+        self.write({'response': json.loads(res)})
+
+
+class DatewiseHandler(RequestHandler):
+    def get(self):
+        res = etl.daily_count()
         self.write({'response': json.loads(res)})
 
 
@@ -25,10 +32,11 @@ settings = dict(
 def make_app():
     return Application(
         [
-        (r'/', MainHandler),
-        (r'/state_wise', StatewiseHandler),
-        (r'/(.*)', tornado.web.StaticFileHandler,
-            {"path": ""})], **settings)
+         (r'/', MainHandler),
+         (r'/state_wise', StatewiseHandler),
+         (r'/daily', DatewiseHandler),
+         (r'/(.*)', tornado.web.StaticFileHandler,
+          {"path": ""})], **settings)
 
 
 port = 9005
