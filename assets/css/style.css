@@ -9879,3 +9879,22 @@ a{
 .cursor-pointer {
   cursor: pointer;
 }
+
+.tooltip-inner {
+  font-size: 12px;
+  min-height: 100% !important;
+  background: #fff;
+  color: #000;
+  border: 2px solid #fff;
+  box-shadow: 0 2px 12px 0 #adadad;
+  text-align: left;
+}
+
+.tooltip.show {
+  opacity: 1;
+  filter:alpha(opacity=100);
+}
+
+.bs-tooltip-right .arrow::before {
+  border-right-color: #fff;
+}

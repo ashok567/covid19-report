@@ -5,48 +5,45 @@ var table_tmplt = _.template($("#state-table").html());
 var pie_tmplt = _.template($("#pie-script").html());
 var bar_tmplt = _.template($("#bar-script").html());
 
-$(window).on('load', function (){
-    $('.loader').fadeOut('slow')
-    $('.wrapper').removeClass('d-none')
-})
-
 function initialize(){
     $.get('/state_wise', function(res){
-        var overview_tmplt = _.template($("#overview-sc").html());
-        var overview_html = overview_tmplt({ overview: res.response[0]});
-        $("#overview").html(overview_html);
-        state_data = _.orderBy(res.response.splice(1), ['Confirmed'], ['desc'])
-        renderTable(state_data.slice(table_index['start_index'], table_index['end_index']))
-        $('#prev-btn').addClass('op-0')
-        renderPie()
-        renderBar()
-        draw_map(state_data, 'Confirmed')
+      var overview_tmplt = _.template($("#overview-sc").html());
+      var overview_html = overview_tmplt({ overview: res.response[0]});
+      $("#overview").html(overview_html);
+      state_data = _.orderBy(res.response.splice(1), ['Confirmed'], ['desc'])
+      $('.loader').fadeOut('slow')
+      $('.wrapper').removeClass('d-none')
+      renderTable(state_data.slice(table_index['start_index'], table_index['end_index']))
+      $('#prev-btn').addClass('op-0')
+      renderPie()
+      renderBar()
+      draw_map(state_data, 'Confirmed')
     })
 }
 
 function renderTable(data){
-    $(".countries").empty()
-    var table_html = table_tmplt({ table_data: data, max_data: data[0] });
-    $(".countries").html(table_html);
+  $(".countries").empty()
+  var table_html = table_tmplt({ table_data: data, max_data: data[0] });
+  $(".countries").html(table_html);
 }
 
 function renderPie(){
-    $("#pie-section").empty()
-    var pie_html = pie_tmplt();
-    $("#pie-section").html(pie_html);
-    draw_pie()
+  $("#pie-section").empty()
+  var pie_html = pie_tmplt();
+  $("#pie-section").html(pie_html);
+  draw_pie()
 }
 
 function renderBar(){
-    $("#bar-section").empty()
-    var bar_html = bar_tmplt();
-    $("#bar-section").html(bar_html);
-    draw_bar()
+  $("#bar-section").empty()
+  var bar_html = bar_tmplt();
+  $("#bar-section").html(bar_html);
+  draw_bar()
 }
 
 $(document).ready(function(){
-    $('.loader').show()
-    initialize()
+  $('.loader').show()
+  initialize()
 })
 
 $('body')
@@ -73,3 +70,9 @@ $('body')
   var map_state_data = _.orderBy(state_data, [selected_id], ['desc'])
   draw_map(map_state_data, selected_id)
 })
+.tooltip({
+  selector: '.map-slice, circle-point',
+  container: 'body',
+  html: true,
+  animated: 'fade'
+});

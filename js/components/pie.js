@@ -60,72 +60,12 @@ function draw_pie(){
     .attr('class', 'pie')
     .on('click', (d) => pieOnClick(d.index))
     .text(function(d){
-      return parseInt((d.data.value/data_sum)*100)+"%"
+      return "("+d.data.value+")"
     })
     .attr("transform", function(d) { return "translate(" + arcGenerator.centroid(d) + ")";  })
     .style("text-anchor", "middle")
     .style("font-size", 11)
     .style("fill", "#fff")
-
-  svg
-    .selectAll("slices")
-    .data(data_ready)
-    .enter()
-    .append("text")
-    .attr('class', 'pie')
-    .on('click', (d) => pieOnClick(d.index))
-    .attr("dy", "1.2em")
-    .text(function(d){
-      return "("+d.data.value+")"
-    })
-    .attr("transform", function(d) { return "translate(" + arcGenerator.centroid(d) + ")";  })
-    .style("text-anchor", "middle")
-    .style("font-size", 10)
-    .style("fill", "#fff")
-
-  //Poly line & label
-  svg
-    .selectAll('polyline')
-    .data(data_ready)
-    .enter().append('polyline')
-    .attr('points', function(d) {
-        var pos = outerArcGenerator.centroid(d);
-        pos[0] = radius * (midAngle(d) < Math.PI ? 1.5 : -1.5);
-        return [outerArcGenerator.centroid(d), pos]
-    })
-    .attr("stroke", "#000")
-    .style("stroke-width", "1px")
-    .style("fill", "none")
-    .style("opacity", 0.5)
-
-
-  svg
-    .selectAll('slices')
-    .data(data_ready)
-    .enter()
-    .append('text')
-    .attr('dx', function(d) {
-      return (midAngle(d)) < Math.PI ? '.35em' : '-.35em';
-    })
-    .attr('dy', '.35em')
-    .text(function(d) {
-        return d.data.key;
-    })
-    .attr('transform', function(d) {
-        var pos = outerArcGenerator.centroid(d);
-        pos[0] = radius * (midAngle(d) < Math.PI ? 1.5 : -1.5);
-        return 'translate(' + pos + ')';
-    })
-    .style('text-anchor', function(d) {
-        return (midAngle(d)) < Math.PI ? 'start' : 'end';
-    })
-    .style("font-size", 12)
-    .style("fill", "#000")
-}
-
-
-function midAngle(d) {
-  return d.startAngle + (d.endAngle - d.startAngle) / 2;
 }
 
 function pieOnClick(sel_i){

@@ -25,8 +25,8 @@ function draw_map(data, type) {
 
   var colorRamp = ['#ffffff', map_color[type]];
 
-  _.each(data, function(d){ rateById.set(d.State, +d.Confirmed) });
-  var max = _.max(_.map(data, function(d){ return parseInt(d.Confirmed); }))
+  _.each(data, function(d){ rateById.set(d.State, +d[type]) });
+  var max = _.max(_.map(data, function(d){ return parseInt(d[type]); }))
 
   var color = d3.scaleLinear()
   .domain([0, max])
@@ -36,15 +36,15 @@ function draw_map(data, type) {
     map.selectAll("path")
     .data(topojson.feature(map_json, map_json.objects.india).features)
     .enter().append("path")
-    // .on('click', function(d){ insights(d.properties.st_nm) })
     .attr("d", path)
-    // .transition().duration(1000)
+    .transition().duration(1000)
     .style("fill", function(d) { return color(rateById.get(d.properties.st_nm))})
-    // .attr('data-placement', 'right')
-    // .attr('data-toggle', 'popover')
-    // .attr('data-title', function(d){
-    //   return d.properties.st_nm.toUpperCase() + ' : '+ rateById.get(d.properties.st_nm)
-    // })
+    .attr('data-placement', 'right')
+    .attr('data-toggle', 'toggle')
+    .attr('class', 'map-slice')
+    .attr('data-title', function(d){
+      return d.properties.st_nm.toUpperCase() + ' : '+ rateById.get(d.properties.st_nm)
+    })
 
     svg.append("path")
       .attr("class", "state-borders")
