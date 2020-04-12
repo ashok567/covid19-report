@@ -150,17 +150,17 @@
                         </td>
                         <td class="td-bar">
                           <div class="progress thin">
-                            <div class="progress-bar yellow-bg" role="progressbar" aria-valuenow="<%=(d['Active']/d['Confirmed'])*100%>" aria-valuemin="0" aria-valuemax="100" style="width: <%=(d['Active']/d['Confirmed'])*100%>%">
+                            <div class="progress-bar facebook-bg" role="progressbar" aria-valuenow="<%=(d['Delta_Confirmed']/d['Delta_Total'])*100%>" aria-valuemin="0" aria-valuemax="100" style="width: <%=(d['Delta_Confirmed']/d['Delta_Total'])*100%>%">
                             </div>
-                            <div class="progress-bar green-bg" role="progressbar" aria-valuenow="<%=(d['Recovered']/d['Confirmed'])*100%>" aria-valuemin="0" aria-valuemax="100" style="width: <%=(d['Recovered']/d['Confirmed'])*100%>%">
+                            <div class="progress-bar green-bg" role="progressbar" aria-valuenow="<%=(d['Delta_Recovered']/d['Delta_Total'])*100%>" aria-valuemin="0" aria-valuemax="100" style="width: <%=(d['Delta_Recovered']/d['Delta_Total'])*100%>%">
                             </div>
-                            <div class="progress-bar red-bg" role="progressbar" aria-valuenow="<%=(d['Deaths']/d['Confirmed'])*100%>" aria-valuemin="0" aria-valuemax="100" style="width: <%=(d['Deaths']/d['Confirmed'])*100%>%">
+                            <div class="progress-bar red-bg" role="progressbar" aria-valuenow="<%=(d['Delta_Deaths']/d['Delta_Total'])*100%>" aria-valuemin="0" aria-valuemax="100" style="width: <%=(d['Delta_Deaths']/d['Delta_Total'])*100%>%">
                             </div>
                           </div>
                           <div class="row m-0">
-                              <span style="width: 33.33%;" class="text-center yellow-color"><%=d['Active']%></span>
-                              <span style="width: 33.33%;" class="text-center green-color"><%=d['Recovered']%></span>
-                              <span style="width: 33.33%;" class="text-center red-color"><%=d['Deaths']%></span>
+                              <span style="width: 33.33%;" class="text-center facebook-color"><%=d['Delta_Confirmed']%></span>
+                              <span style="width: 33.33%;" class="text-center green-color"><%=d['Delta_Recovered']%></span>
+                              <span style="width: 33.33%;" class="text-center red-color"><%=d['Delta_Deaths']%></span>
                           </div>
                         </td>
                       </tr>
