@@ -88,8 +88,8 @@
             </div>
           </div>
 
-          <div class="card col-sm-12 col-md-7 px-0">
-            <div class="card-body pb-0">
+          <div class="card col-sm-12 col-md-7 px-0" id="table-section">
+            <div class="card-body pb-0 table-responsive">
               <!-- <div class="panel panel-default">
                 <div class="panel-heading">
                   <h2><i class="fa fa-location-arrow"></i><strong>States</strong></h2>
@@ -104,9 +104,9 @@
                   <thead>
                     <tr>
                       <th>
-                        State
-                        <a id="prev-btn"><i class="fa fa-chevron-left  pl-1"></i></a>
-                        <a id="next-btn"><i class="fa fa-chevron-right  pl-1"></i></a>
+                        States
+                        <!-- <a id="prev-btn"><i class="fa fa-chevron-left  pl-1"></i></a>
+                        <a id="next-btn"><i class="fa fa-chevron-right  pl-1"></i></a> -->
                       </th>
                       <th class="facebook-color">Confirmed</th>
                       <th class="yellow-color">Active</th>
@@ -115,11 +115,11 @@
                       <th>Performance</th>
                     </tr>
                   </thead>
-                  <tbody class="countries">
+                  <tbody class="states">
                     <script type="text/html" id="state-table">
                       <% _.each(table_data, function(d){ %>
                       <tr>
-                        <td><%=d['State']%></td>
+                        <td class=""><%=d['State']%></td>
                         <td class="td-bar facebook-color cursor-pointer map-click" id="Confirmed">
                           <div class="progress thin">
                             <div class="progress-bar facebook-bg" role="progressbar" aria-valuenow="<%=(d['Confirmed']/max_data['Confirmed'])*100%>" aria-valuemin="0" aria-valuemax="100" style="width: <%=(d['Confirmed']/max_data['Confirmed'])*100%>%"></div>

@@ -9898,3 +9898,40 @@ a{
 .bs-tooltip-right .arrow::before {
   border-right-color: #fff;
 }
+
+/* scrollbar css */
+::-webkit-scrollbar {
+  width: 5px !important;
+  height: 5px;
+}
+::-webkit-scrollbar-thumb {
+  background: #CACACA !important;
+  border-radius: 2.5px !important;
+}
+::-webkit-scrollbar-track {
+  background: #f7f7f7 !important;
+  opacity: 0.21 !important;
+  border-radius: 5px !important;
+}
+
+#table-section{
+  height: 486px;
+}
+#table-section .table-responsive{
+  height: 400px;
+  overflow-y: auto;
+}
+
+.table thead th {
+  color: rgba(40,45,50,.5);
+  letter-spacing: 0.1px;
+  line-height: 11px;
+  font-weight: bold;
+}
+
+.table tbody td {
+  color: rgba(40,45,50,1);
+  line-height: 20px;
+  padding: .40rem;
+  vertical-align: center;
+}

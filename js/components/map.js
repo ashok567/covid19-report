@@ -3,11 +3,11 @@
 function draw_map(data, type) {
   $("#ind-map").empty()
   var width = $("#ind-map").width(),
-      height = 600;
+      height = $("#table-section").height()-20;
 
   // var proj = d3.geoMercator().scale(6000).translate([-1120, 700]);
 
-  var proj = d3.geoMercator().scale(1000).translate([-1180, 720]);
+  var proj = d3.geoMercator().scale(800).translate([-890, 560]);
 
   var path = d3.geoPath().projection(proj);
 

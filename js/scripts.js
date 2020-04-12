@@ -1,6 +1,6 @@
 /* global draw_pie, draw_bar, draw_map */
 var state_data = []
-var table_index = {'start_index': 0, 'end_index': 10}
+// var table_index = {'start_index': 0, 'end_index': 10}
 var table_tmplt = _.template($("#state-table").html());
 var pie_tmplt = _.template($("#pie-script").html());
 var bar_tmplt = _.template($("#bar-script").html());
@@ -13,7 +13,8 @@ function initialize(){
       state_data = _.orderBy(res.response.splice(1), ['Confirmed'], ['desc'])
       $('.loader').fadeOut('slow')
       $('.wrapper').removeClass('d-none')
-      renderTable(state_data.slice(table_index['start_index'], table_index['end_index']))
+      // renderTable(state_data.slice(table_index['start_index'], table_index['end_index']))
+      renderTable(state_data)
       $('#prev-btn').addClass('op-0')
       renderPie()
       renderBar()
@@ -22,9 +23,9 @@ function initialize(){
 }
 
 function renderTable(data){
-  $(".countries").empty()
+  $(".states").empty()
   var table_html = table_tmplt({ table_data: data, max_data: data[0] });
-  $(".countries").html(table_html);
+  $(".states").html(table_html);
 }
 
 function renderPie(){
@@ -47,24 +48,24 @@ $(document).ready(function(){
 })
 
 $('body')
-.on('click', '#next-btn', function(){
-  $('#prev-btn').removeClass('op-0')
-  table_index['start_index'] += 10
-  table_index['end_index'] += 10
-  if(table_index['start_index']<state_data.length){
-    if(table_index['end_index']>state_data.length) $('#next-btn').addClass('op-0')
-    renderTable(state_data.slice(table_index['start_index'], table_index['end_index']))
-  }
-})
-.on('click', '#prev-btn', function(){
-  $('#next-btn').removeClass('op-0')
-  table_index['start_index'] -= 10
-  table_index['end_index'] -= 10
-  if (table_index['start_index']>=0){
-    if(table_index['start_index']==0) $('#prev-btn').addClass('op-0')
-    renderTable(state_data.slice(table_index['start_index'], table_index['end_index']))
-  }
-})
+// .on('click', '#next-btn', function(){
+//   $('#prev-btn').removeClass('op-0')
+//   table_index['start_index'] += 10
+//   table_index['end_index'] += 10
+//   if(table_index['start_index']<state_data.length){
+//     if(table_index['end_index']>state_data.length) $('#next-btn').addClass('op-0')
+//     renderTable(state_data.slice(table_index['start_index'], table_index['end_index']))
+//   }
+// })
+// .on('click', '#prev-btn', function(){
+//   $('#next-btn').removeClass('op-0')
+//   table_index['start_index'] -= 10
+//   table_index['end_index'] -= 10
+//   if (table_index['start_index']>=0){
+//     if(table_index['start_index']==0) $('#prev-btn').addClass('op-0')
+//     renderTable(state_data.slice(table_index['start_index'], table_index['end_index']))
+//   }
+// })
 .on('click', '.map-click', function(){
   var selected_id = $(this).attr('id')
   var map_state_data = _.orderBy(state_data, [selected_id], ['desc'])
