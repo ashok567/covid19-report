@@ -11,7 +11,7 @@ function draw_map(data, type) {
 
   var path = d3.geoPath().projection(proj);
 
-  var rateById = d3.map();
+  var mapping = d3.map();
 
   var svg = d3.select("#ind-map")
   .append("svg")
@@ -25,7 +25,7 @@ function draw_map(data, type) {
 
   var colorRamp = ['#ffffff', map_color[type]];
 
-  _.each(data, function(d){ rateById.set(d.State, +d[type]) });
+  _.each(data, function(d){ mapping.set(d.State, +d[type]) });
   var max = _.max(_.map(data, function(d){ return parseInt(d[type]); }))
 
   var color = d3.scaleLinear()
@@ -38,12 +38,16 @@ function draw_map(data, type) {
     .enter().append("path")
     .attr("d", path)
     .transition().duration(1000)
-    .style("fill", function(d) { return color(rateById.get(d.properties.st_nm))})
+    .style("fill", function(d) { return color(mapping.get(d.properties.st_nm))})
     .attr('data-placement', 'right')
     .attr('data-toggle', 'toggle')
     .attr('class', 'map-slice')
     .attr('data-title', function(d){
-      return d.properties.st_nm.toUpperCase() + ' : '+ rateById.get(d.properties.st_nm)
+      return `<div><div><span class="pl-1">${d.properties.st_nm.toUpperCase()}</span></div>
+      <div><span class="circle-sm facebook-bg"></span><span class="pl-1">Confirmed: ${_.filter(data, (e) => e.State==String(d.properties.st_nm))[0]['Confirmed']}</span></div>
+      <div><span class="circle-sm yellow-bg"></span><span class="pl-1">Active: ${_.filter(data, (e) => e.State==String(d.properties.st_nm))[0]['Active']}</span></div>
+      <div><span class="circle-sm green-bg"></span><span class="pl-1">Recovered: ${_.filter(data, (e) => e.State==String(d.properties.st_nm))[0]['Recovered']}</span></div>
+      <div><span class="circle-sm red-bg"></span><span class="pl-1">Deaths: ${_.filter(data, (e) => e.State==String(d.properties.st_nm))[0]['Deaths']}</span></div></div>`
     })
 
     svg.append("path")

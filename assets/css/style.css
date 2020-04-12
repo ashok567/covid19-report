@@ -9935,3 +9935,14 @@ a{
   padding: .40rem;
   vertical-align: center;
 }
+
+.circle-sm {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.fb-bg{
+  background: blue;
+}
