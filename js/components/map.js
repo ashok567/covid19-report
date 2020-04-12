@@ -37,7 +37,7 @@ function draw_map(data, type) {
     .data(topojson.feature(map_json, map_json.objects.india).features)
     .enter().append("path")
     .attr("d", path)
-    .transition().duration(1000)
+    .transition().duration(1500)
     .style("fill", function(d) { return color(mapping.get(d.properties.st_nm))})
     .attr('data-placement', 'right')
     .attr('data-toggle', 'toggle')

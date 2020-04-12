@@ -14,6 +14,7 @@ function initialize(){
       $('.loader').fadeOut('slow')
       $('.wrapper').removeClass('d-none')
       // renderTable(state_data.slice(table_index['start_index'], table_index['end_index']))
+      d3.select('body').transition().duration(1000)
       renderTable(state_data)
       $('#prev-btn').addClass('op-0')
       renderPie()
