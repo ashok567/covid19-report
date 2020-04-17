@@ -10,10 +10,10 @@ function sparkline(dataset, ele){
   var parseDate = d3.timeParse("%Q");
   // var parseDate = d3.timeParse("%Y-%m-%d");
 
-  var xMax = d3.max(dataset, (d)=>d.date)
-  var xMin = d3.min(dataset, (d)=>d.date)
-  var ticks_count = dataset.length < 5 ? dataset.length : 5
-  var ticks = divideTicks(xMin, xMax, ticks_count)
+//   var xMax = d3.max(dataset, (d)=>d.date)
+//   var xMin = d3.min(dataset, (d)=>d.date)
+//   var ticks_count = dataset.length < 5 ? dataset.length : 5
+//   var ticks = divideTicks(xMin, xMax, ticks_count)
 
   dataset.forEach(function(d) {
       d.date = parseDate(d.date);
