@@ -26,6 +26,7 @@ def statewise_count():
 def daily_count():
     daily_df = pd.read_excel(BytesIO(data),
                              sheet_name='Statewise_Daily', encoding='utf-8')
+    print(daily_df.T.pivot_table(index='Date', columns='Status'))
     daily_df = daily_df.groupby(['Date', 'Status'])['TT'].sum().reset_index()
     daily_df.rename(columns={'TT': 'Count'}, inplace=True)
     # daily_df['Active'] = daily_df['Confirmed']
