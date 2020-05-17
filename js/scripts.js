@@ -1,4 +1,4 @@
-/* global draw_pie, draw_bar, draw_map */
+/* global draw_pie, draw_bar, draw_map, draw_sparkline */
 var state_data = []
 // var table_index = {'start_index': 0, 'end_index': 10}
 var table_tmplt = _.template($("#state-table").html());
@@ -16,7 +16,6 @@ function initialize(){
       // renderTable(state_data.slice(table_index['start_index'], table_index['end_index']))
       d3.select('body').transition().duration(1000)
       renderTable(state_data)
-      $('#prev-btn').addClass('op-0')
       renderPie()
       renderBar()
       draw_map(state_data, 'Confirmed')
@@ -41,7 +40,12 @@ function renderBar(){
   $("#bar-section").empty()
   var bar_html = bar_tmplt();
   $("#bar-section").html(bar_html);
-  draw_bar()
+  $.get('/time_series', function(res){
+    res = res.response
+    var dataset = _.map(res, (d)=> _.pick(d, ['Date', 'Daily Confirmed']))
+    draw_sparkline(dataset, '#Confirmed-spark', '#3b5998')
+    draw_bar()
+  })
 }
 
 $(document).ready(function(){
@@ -50,24 +54,6 @@ $(document).ready(function(){
 })
 
 $('body')
-// .on('click', '#next-btn', function(){
-//   $('#prev-btn').removeClass('op-0')
-//   table_index['start_index'] += 10
-//   table_index['end_index'] += 10
-//   if(table_index['start_index']<state_data.length){
-//     if(table_index['end_index']>state_data.length) $('#next-btn').addClass('op-0')
-//     renderTable(state_data.slice(table_index['start_index'], table_index['end_index']))
-//   }
-// })
-// .on('click', '#prev-btn', function(){
-//   $('#next-btn').removeClass('op-0')
-//   table_index['start_index'] -= 10
-//   table_index['end_index'] -= 10
-//   if (table_index['start_index']>=0){
-//     if(table_index['start_index']==0) $('#prev-btn').addClass('op-0')
-//     renderTable(state_data.slice(table_index['start_index'], table_index['end_index']))
-//   }
-// })
 .on('click', '.map-click', function(){
   var selected_id = $(this).attr('id')
   var map_state_data = _.orderBy(state_data, [selected_id], ['desc'])

@@ -1,46 +1,39 @@
 /* exported draw_bar */
 var data = [
   {
-    "date": '2019-01-01',
+    "date": 'January',
     "bar": 1640,
     "line1": 31,
     "line2": 12,
     "line3": 21
   },
   {
-    "date": '2019-02-01',
+    "date": 'February',
     "bar": 1130,
     "line1": 23,
     "line2": 05,
     "line3": 41
   },
   {
-    "date": '2019-03-01',
+    "date": 'March',
     "bar": 1190,
     "line1": 34,
     "line2": 12,
     "line3": 32
   },
   {
-    "date": '2019-04-01',
+    "date": 'April',
     "bar": 1200,
     "line1": 21,
     "line2": 36,
     "line3": 18
   },
   {
-    "date": '2019-05-01',
+    "date": 'May',
     "bar": 1000,
     "line1": 44,
     "line2": 21,
     "line3": 31
-  },
-  {
-    "date": '2019-06-01',
-    "bar": 1400,
-    "line1": 41,
-    "line2": 11,
-    "line3": 21
   }
 ]
 
@@ -51,7 +44,7 @@ function draw_bar(){
       height = 200 - margin.top - margin.bottom;
 
   // parse the date / time
-  var parseTime = d3.timeParse("%Y-%m-%d");
+  var parseTime = d3.timeParse("%B");
 
   data.forEach(function(d) {
     d.date = parseTime(d.date);
@@ -91,7 +84,7 @@ function draw_bar(){
     .attr("y", function(d){ return  yBar(d.bar);})
     .attr("height", function(d){ return height - yBar(d.bar); });
 
-  line_colors = ['#FCB322', '#d95043', '#26c281']
+  line_colors = ['#3b5998', '#d95043', '#26c281']
 
   _.each([0,1,2], function(i){
     // define the 1st line

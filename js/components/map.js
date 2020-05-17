@@ -7,7 +7,8 @@ function draw_map(data, type) {
 
   // var proj = d3.geoMercator().scale(6000).translate([-1120, 700]);
 
-  var proj = d3.geoMercator().scale(800).translate([-890, 560]);
+  if(width>500) var proj = d3.geoMercator().scale(800).translate([-890, 560]);
+  else var proj = d3.geoMercator().scale(570).translate([-682, 460]);
 
   var path = d3.geoPath().projection(proj);
 

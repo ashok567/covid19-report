@@ -9946,3 +9946,7 @@ a{
 .fb-bg{
   background: blue;
 }
+
+.todays-bar{
+  font-size: 8px;
+}

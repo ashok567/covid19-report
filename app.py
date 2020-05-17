@@ -34,7 +34,7 @@ def make_app():
         [
          (r'/', MainHandler),
          (r'/state_wise', StatewiseHandler),
-         (r'/daily', DatewiseHandler),
+         (r'/time_series', DatewiseHandler),
          (r'/(.*)', tornado.web.StaticFileHandler,
           {"path": ""})], **settings)
 
