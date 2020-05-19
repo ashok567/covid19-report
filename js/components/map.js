@@ -35,7 +35,7 @@ function draw_map(data, type) {
 
   $.getJSON("assets/map/india.json", function(map_json){
     map.selectAll("path")
-    .data(topojson.feature(map_json, map_json.objects.india).features)
+    .data(topojson.feature(map_json, map_json.objects.india_states).features)
     .enter().append("path")
     .attr("d", path)
     .transition().duration(1500)
@@ -51,8 +51,8 @@ function draw_map(data, type) {
       <div><span class="circle-sm red-bg"></span><span class="pl-1">Deaths: ${_.filter(data, (e) => e.State==String(d.properties.st_nm))[0]['Deaths']}</span></div></div>`
     })
 
-    svg.append("path")
-      .attr("class", "state-borders")
-      .attr("d", path(topojson.mesh(map_json, map_json.objects.india, function(a, b) { return a !== b; })));
+    // svg.append("path")
+    //   .attr("class", "state-borders")
+    //   .attr("d", path(topojson.mesh(map_json, map_json.objects.india, function(a, b) { return a !== b; })));
   });
 }

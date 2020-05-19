@@ -18,7 +18,7 @@ class StatewiseHandler(RequestHandler):
 
 class DatewiseHandler(RequestHandler):
     def get(self):
-        res = etl.daily_count()
+        res = etl.time_series()
         self.write({'response': json.loads(res)})
 
 

@@ -3,12 +3,12 @@
 function draw_sparkline(dataset, ele, color){
   var date  = _.keys(dataset[0])[0],
       count  = _.keys(dataset[0])[1]
-  var width = 120;
-  var height = 28;
+  var width = 80;
+  var height = 30;
   var x = d3.scaleLinear().range([0, width - 6]);
   var y = d3.scaleLinear().range([height - 6, 0]);
 
-  var parseDate = d3.timeParse("%d %B");
+  var parseDate = d3.timeParse("%m");
 
   dataset.forEach(function(d) {
       d[date] = parseDate(d[date]);

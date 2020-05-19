@@ -2,6 +2,7 @@ import pandas as pd
 import requests
 from io import BytesIO
 import yaml
+import datetime as dt
 
 
 with open('config.yml', 'r') as config_file:
@@ -27,13 +28,32 @@ def statewise_count():
     return statewise_df
 
 
-def daily_count():
-    response = requests.get(config['case_time_series'])
-    data = response.content
-    daily_df = pd.read_csv(BytesIO(data), encoding='utf-8')
-    daily_df['Date'] = daily_df['Date'].str.strip()
-    daily_df = daily_df.to_json(orient='records')
-    return daily_df
+def time_series():
+    time_series_response = requests.get(config['case_time_series'])
+    time_series_data = time_series_response.content
+    daily_df = pd.read_csv(BytesIO(time_series_data), encoding='utf-8')
+    daily_df['Month'] = daily_df['Date'].apply(
+        lambda x: x.strip().split(' ')[1])
+    daily_df = daily_df.fillna(0)
+    daily_df = daily_df.drop('Date', axis=1)
+    daily_df = daily_df.groupby('Month').sum().reset_index()
 
-
-daily_count()
+    test_response = requests.get(config['statewise_tested_numbers_data'])
+    test_data = test_response.content
+    test_df = pd.read_csv(BytesIO(test_data), encoding='utf-8')
+    print(list(test_df.columns))
+    reqd_cols = ['Updated On', 'Total Tested',
+                 'Positive', 'Negative', 'Unconfirmed']
+    test_df = test_df[reqd_cols]
+    test_df = test_df.fillna(0)
+    test_df['Month'] = test_df['Updated On'].apply(
+        lambda x: dt.datetime.strftime(
+            dt.datetime.strptime(x, '%d/%m/%Y'), '%B'))
+    test_df = test_df.drop('Updated On', axis=1)
+    test_df = test_df.groupby('Month').sum().reset_index()
+    merged_df = daily_df.merge(test_df, how='left', on='Month')
+    merged_df['Month'] = pd.to_datetime(merged_df.Month, format='%B').dt.month
+    merged_df = merged_df.sort_values(by='Month')
+    merged_df = merged_df.fillna(0)
+    merged_df = merged_df.to_json(orient='records')
+    return merged_df

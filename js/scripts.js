@@ -42,9 +42,9 @@ function renderBar(){
   $("#bar-section").html(bar_html);
   $.get('/time_series', function(res){
     res = res.response
-    var dataset = _.map(res, (d)=> _.pick(d, ['Date', 'Daily Confirmed']))
-    draw_sparkline(dataset, '#Confirmed-spark', '#3b5998')
-    draw_bar()
+    var dataset = _.map(res, (d)=> _.pick(d, ['Month', 'Total Tested', 'Total Confirmed', 'Total Recovered', 'Total Deceased']))
+    // draw_sparkline(dataset, '#Confirmed-spark', '#3b5998')
+    draw_bar(dataset)
   })
 }
 
