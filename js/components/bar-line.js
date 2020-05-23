@@ -21,17 +21,22 @@ function draw_bar(data){
 
   // set the ranges
   var xScale = d3.scaleBand().range([0, width]).paddingInner(0.6).paddingOuter(0.3);
-  var yScale = d3.scaleLinear().range([height, 0]);
+  var yLine = d3.scaleLinear().range([height, 0]);
+  var yBar = d3.scaleLinear().range([height, 0]);
 
   xScale.domain(data.map(function(d) { return d[date]; }));
-  var y_max_val = d3.max(data, function(d) { return d[line1]; })
-  yScale.domain([0, y_max_val]);
+  var yline_max_val = d3.max(data, function(d) { return d[line1]; })
+  var ybar_max_val = d3.max(data, function(d) { return d[bar]; })
+  yLine.domain([0, yline_max_val]);
+  yBar.domain([0, ybar_max_val]);
 
   var svg = d3.select("#bar_div").append("svg")
     .attr('viewBox', [0, 0, div_width, height + margin.top + margin.bottom])
     .append("g")
     .attr("transform",
           "translate(" + margin.left + "," + margin.top + ")");
+
+  var valueFormat = d3.format(".2s")
 
   var rect = svg.selectAll("rect")
   .data(data)
@@ -43,26 +48,22 @@ function draw_bar(data){
     .style("opacity", 0.8)
     .attr("x", function(d){ return xScale(d[date]); })
     .attr("width", xScale.bandwidth())
-    .attr("y", function(d){ return  yScale(d[bar]);})
-    .attr("height", function(d){ return height - yScale(d[bar]); });
-
-  // var valueFormat = d3.format("~s")
-
-  // rect.enter().append("text")
-  //   .attr("text-anchor", "middle")
-  //   .attr("x", function(d) { return xScale(d[date]) })
-  //   .attr("y", function(d) { return yScale(y_max_val); })
-  //   .attr("dy", ".35em")
-  //   .style("font-size", "9px")
-  //   .text(function(d) { return valueFormat(d[bar]); });
+    .attr("y", function(d){ return  yBar(d[bar]);})
+    .attr("height", function(d){ return height - yBar(d[bar]); })
+    .attr('data-placement', 'right')
+    .attr('data-toggle', 'toggle')
+    .attr('class', 'barline-slice')
+    .attr('data-title', function(d){
+      return valueFormat(d[bar])
+    })
 
   line_colors = ['#3b5998', '#d95043', '#26c281']
 
-  _.each(['Total Confirmed', 'Total Recovered', 'Total Deceased'], function(k, i){
+  _.each([line1, line2, line3], function(k, i){
     // define the 1st line
     var valueline = d3.line()
         .x(function(d) { return xScale(d[date])+ xScale.bandwidth()/2; })
-        .y(function(d) { return yScale(d[k]); });
+        .y(function(d) { return yLine(d[k]); });
 
     // Add the valueline path.
     svg.append("path")
@@ -82,31 +83,55 @@ function draw_bar(data){
         .style("stroke-width", "1px")
         .style("fill", line_colors[i])
         .attr("cx", function(d){ return xScale(d[date]) + xScale.bandwidth()/2; })
-        .attr("cy", function(d){ return yScale(d[k]); })
-        .attr("r", "3px");
+        .attr("cy", function(d){ return yLine(d[k]); })
+        .attr("r", "3px")
+        .attr('data-placement', 'right')
+        .attr('data-toggle', 'toggle')
+        .attr('class', 'barline-slice')
+        .attr('data-title', function(d){
+          return valueFormat(d[k])
+        })
   })
 
   // Add the X Axis
   svg.append("g")
-      .attr("class", "xaxis")
-      .attr("transform", "translate(0," + height + ")")
-      .call(d3.axisBottom(xScale).tickFormat(d3.timeFormat('%b')).tickSize(0).tickPadding(8));
+    .attr("class", "xaxis")
+    .attr("transform", "translate(0," + height + ")")
+    .call(d3.axisBottom(xScale).tickFormat(d3.timeFormat('%b')).tickSize(0).tickPadding(8));
 
   // Add the Y1 Axis
+  var lineTickValues = divideTicks(0, yline_max_val, 4)
   svg.append("g")
-      .attr("class", "yaxis")
-      .call(d3.axisLeft(yScale).ticks(3).tickSize(-width).tickFormat(d3.format("~s")).tickPadding(8));
+    .attr("class", "ylineaxis")
+    .call(d3.axisLeft(yLine).tickValues(lineTickValues).tickSize(-width).tickFormat(valueFormat).tickPadding(8));
+
+    // Add the Y2 Axis
+  var barTickValues = divideTicks(0, ybar_max_val, 4)
+  svg.append("g")
+    .attr("class", "ybaraxis")
+    .attr("transform", "translate( " + width + ", 0 )")
+    .call(d3.axisRight(yBar).tickValues(barTickValues).tickSize(0).tickFormat(valueFormat).tickPadding(8));
 
   svg.append('text')
-      .attr('class', 'yaxis label')
-      .attr('text-anchor', 'middle')
-      .attr('x', -height/2)
-      .attr('y', -margin.right)
-      .attr('font-size', '12px')
-      .attr('transform', 'rotate(-90)')
-      .text('Count');
+    .attr('class', 'ylineaxis label')
+    .attr('text-anchor', 'middle')
+    .attr('x', -height/2)
+    .attr('y', -margin.right)
+    .attr('font-size', '12px')
+    .attr('transform', 'rotate(-90)')
+    .text('Cases');
 
-  svg.selectAll('.yaxis text')
+  svg.append('text')
+    .attr('class', 'ybaraxis label')
+    .attr('text-anchor', 'middle')
+    .attr('x', -height/2)
+    .attr('y', width+margin.right)
+    .attr('font-size', '12px')
+    .style('fill', '#797979')
+    .attr('transform', 'rotate(-90)')
+    .text('Tests');
+
+  svg.selectAll('.ylineaxis text')
   .style('fill', '#000')
 
   svg.selectAll('.xaxis text')
@@ -117,7 +142,7 @@ function draw_bar(data){
   .style('stroke', 'none')
 
 
-  d3.selectAll('.yaxis .tick').each(function(d) {
+  d3.selectAll('.ylineaxis .tick').each(function(d) {
     d3.select(this).select("line").style("stroke-dasharray", function() {
       return d==0 ? '0':'5 5'
     })

@@ -1,4 +1,6 @@
+/* exported divideTicks */
 /* global draw_pie, draw_bar, draw_map, draw_sparkline */
+
 var state_data = []
 // var table_index = {'start_index': 0, 'end_index': 10}
 var table_tmplt = _.template($("#state-table").html());
@@ -48,6 +50,19 @@ function renderBar(){
   })
 }
 
+function divideTicks(min, max, ticks) {
+  var result = []
+  var delta = 0
+  delta = (max - min) / (ticks - 1);
+  var i = 0
+  while (i <= ticks - 1) {
+    result.push(parseInt(min));
+    min += delta;
+    i++
+  }
+  return result
+}
+
 $(document).ready(function(){
   $('.loader').show()
   initialize()
@@ -60,7 +75,7 @@ $('body')
   draw_map(map_state_data, selected_id)
 })
 .tooltip({
-  selector: '.map-slice, circle-point',
+  selector: '.map-slice, .barline-slice',
   container: 'body',
   html: true,
   animated: 'fade'

@@ -2,13 +2,20 @@
 
 function draw_map(data, type) {
   $("#ind-map").empty()
-  var width = $("#ind-map").width(),
-      height = $("#table-section").height()-20;
+  var width = $("#ind-map").width();
 
   // var proj = d3.geoMercator().scale(6000).translate([-1120, 700]);
 
-  if(width>500) var proj = d3.geoMercator().scale(800).translate([-890, 560]);
-  else var proj = d3.geoMercator().scale(570).translate([-682, 460]);
+  if(width>500){
+    var height = 450;
+    // var proj = d3.geoMercator().scale(800).translate([-890, 600]);
+    var proj = d3.geoMercator().scale(700).translate([-750, 520]);
+  }
+  else{
+    var height = 300;
+    // var proj = d3.geoMercator().scale(575).translate([-685, 490]);
+    var proj = d3.geoMercator().scale(500).translate([-570, 360]);
+  }
 
   var path = d3.geoPath().projection(proj);
 
@@ -44,7 +51,7 @@ function draw_map(data, type) {
     .attr('data-toggle', 'toggle')
     .attr('class', 'map-slice')
     .attr('data-title', function(d){
-      return `<div><div><span class="pl-1">${d.properties.st_nm.toUpperCase()}</span></div>
+      return `<div class="font-italic"><div><span class="pl-1">${d.properties.st_nm.toUpperCase()}</span></div>
       <div><span class="circle-sm facebook-bg"></span><span class="pl-1">Confirmed: ${_.filter(data, (e) => e.State==String(d.properties.st_nm))[0]['Confirmed']}</span></div>
       <div><span class="circle-sm yellow-bg"></span><span class="pl-1">Active: ${_.filter(data, (e) => e.State==String(d.properties.st_nm))[0]['Active']}</span></div>
       <div><span class="circle-sm green-bg"></span><span class="pl-1">Recovered: ${_.filter(data, (e) => e.State==String(d.properties.st_nm))[0]['Recovered']}</span></div>

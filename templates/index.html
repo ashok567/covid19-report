@@ -14,7 +14,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/todc-bootstrap/3.4.0-3.4.1/css/bootstrap-theme.min.css">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
   <link rel="stylesheet" href="./assets/css/style.css">
-  <link  rel="stylesheet" href="./assets/css/style-responsive.css">
+  <!-- <link  rel="stylesheet" href="./assets/css/style-responsive.css"> -->
 </head>
 
 <body>
@@ -38,7 +38,7 @@
               <div class="info-box white-bg">
                 <div class="count facebook-color"><%=overview['Confirmed']%><span class="badge facebook-bg">+<%=overview['Delta_Confirmed']%></span></div>
                 <div class="row">
-                  <div class="ml-4 title facebook-color" style="float: left;">Confirmed</div>
+                  <div class="ml-4 title facebook-color font-italic" style="float: left;">Confirmed</div>
                   <div id="Confirmed-spark" style="float: right;"></div>
                 </div>
               </div>
@@ -51,7 +51,7 @@
             <a href="#ind-map">
               <div class="info-box white-bg">
                 <div class="count yellow-color"><%=overview['Active']%></div>
-                <div class="title yellow-color">Active</div>
+                <div class="title yellow-color font-italic">Active</div>
               </div>
             </a>
             <!--/.info-box-->
@@ -62,7 +62,7 @@
             <a href="#ind-map">
               <div class="info-box white-bg">
                 <div class="count green-color"><%=overview['Recovered']%><span class="badge green-bg">+<%=overview['Delta_Recovered']%></span></div>
-                <div class="title green-color">Recovered</div>
+                <div class="title green-color font-italic">Recovered</div>
               </div>
             </a>
             <!--/.info-box-->
@@ -73,7 +73,7 @@
             <a href="#ind-map">
               <div class="info-box white-bg">
                 <div class="count red-color"><%=overview['Deaths']%><span class="badge red-bg">+<%=overview['Delta_Deaths']%></span></div>
-                <div class="title red-color">Fatal</div>
+                <div class="title red-color font-italic">Fatal</div>
               </div>
             </a>
             <!--/.info-box-->
@@ -87,22 +87,19 @@
         <div class="card-deck my-3">
           <div class="card col-sm-12 col-md-5 px-0">
             <div class="card-body pb-0">
-              <!-- <div class="panel-body-map"> -->
-                <div id="ind-map"></div>
-              <!-- </div> -->
-              <!-- </div> -->
+              <div class="d-flex align-items-center justify-content-between">
+                <label class="mb-0 font-weight-bold font-italic">State-wise Distribution</label>
+              </div>
+              <div id="ind-map"></div>
             </div>
           </div>
 
           <div class="card col-sm-12 col-md-7 px-0" id="table-section">
             <div class="card-body pb-0 table-responsive">
-              <!-- <div class="panel-body"> -->
                 <table class="table">
-                  <thead>
+                  <thead class="font-italic">
                     <tr>
-                      <th>
-                        States
-                      </th>
+                      <th>States</th>
                       <th class="facebook-color">Confirmed</th>
                       <th class="yellow-color">Active</th>
                       <th class="green-color">Recovered</th>
@@ -114,7 +111,7 @@
                     <script type="text/html" id="state-table">
                       <% _.each(table_data, function(d){ %>
                       <tr>
-                        <td class=""><%=d['State']%></td>
+                        <td class="font-italic"><%=d['State']%></td>
                         <td class="td-bar facebook-color cursor-pointer map-click" id="Confirmed">
                           <div class="progress thin">
                             <div class="progress-bar facebook-bg" role="progressbar" aria-valuenow="<%=(d['Confirmed']/max_data['Confirmed'])*100%>" aria-valuemin="0" aria-valuemax="100" style="width: <%=(d['Confirmed']/max_data['Confirmed'])*100%>%"></div>
@@ -163,8 +160,6 @@
                     </script>
                   </tbody>
                 </table>
-              <!-- </div> -->
-              <!-- </div> -->
             </div>
           </div>
         </div>
@@ -173,12 +168,28 @@
             <div class="card-body" id="pie-section">
               <script type="text/html" id="pie-script">
                 <div class="d-flex align-items-center justify-content-between">
-                  <label class="mb-0 fs-b fs-12 ls-5 font-weight-bold text-uppercase">Open PO Distribution</label>
+                  <label class="mb-0 fs-b fs-12 ls-5 font-weight-bold font-italic">Test Conducted</label>
                 </div>
                 <div class="mt-3">
                   <div class="row">
                     <div class="col-sm-6 col-md-6" id="pie_div1"></div>
                     <div class="col-sm-6 col-md-6" id="pie_div2"></div>
+                  </div>
+                  <div class="d-flex align-items-center justify-content-center fs-10 text-color3">
+                      <div class="d-flex align-items-center justify-content-center font-italic">
+                        <span>
+                          <span class="circle-sm facebook-bg"></span>
+                          <span class="pl-1">Confirmed</span>
+                        </span>
+                        <span class="pl-2">
+                          <span class="circle-sm green-bg"></span>
+                          <span class="pl-1">Recovered</span>
+                        </span>
+                        <span class="pl-2">
+                          <span class="circle-sm red-bg"></span>
+                          <span class="pl-1">Fatal</span>
+                        </span>
+                      </div>
                   </div>
                 </div>
               </script>
@@ -188,13 +199,33 @@
             <div class="card-body" id="bar-section">
               <script type="text/html" id="bar-script">
                 <div class="d-flex align-items-center justify-content-between">
-                  <label class="mb-0 fs-b fs-12 ls-5 font-weight-bold text-uppercase">Spread & Test Over Time</label>
+                  <label class="mb-0 fs-b fs-12 ls-5 font-weight-bold font-italic">Spread & Test Over Time</label>
                 </div>
-                <div class="d-flex align-items-center fs-10 text-color1 fs-i">
+                <div class="d-flex align-items-center fs-10 text-color1 fs-i font-italic">
                   <span>Lines: No. of Cases</span>
                   <span class="ml-3">Bars: No. of Tests</span>
                 </div>
                 <div class="mt-3" id="bar_div"></div>
+                <div class="d-flex align-items-center justify-content-center fs-10 text-color3">
+                  <div class="d-flex align-items-center justify-content-center font-italic">
+                    <span>
+                      <span class="circle-sm facebook-bg"></span>
+                      <span class="pl-1">Confirmed</span>
+                    </span>
+                    <span class="pl-2">
+                      <span class="circle-sm green-bg"></span>
+                      <span class="pl-1">Recovered</span>
+                    </span>
+                    <span class="pl-2">
+                      <span class="circle-sm red-bg"></span>
+                      <span class="pl-1">Fatal</span>
+                    </span>
+                    <span class="pl-2">
+                      <span class="circle-sm test-bg"></span>
+                      <span class="pl-1">Tests</span>
+                    </span>
+                  </div>
+                </div>
               </script>
             </div>
           </div>

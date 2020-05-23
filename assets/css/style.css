@@ -9915,15 +9915,15 @@ a{
 }
 
 #table-section{
-  height: 486px;
+  height: 500px !important;
 }
+
 #table-section .table-responsive{
-  height: 400px;
+  height: 450px;
   overflow-y: auto;
 }
 
 .table thead th {
-  color: rgba(40,45,50,.5);
   letter-spacing: 0.1px;
   line-height: 11px;
   font-weight: bold;
@@ -9931,7 +9931,7 @@ a{
 
 .table tbody td {
   color: rgba(40,45,50,1);
-  line-height: 20px;
+  /* line-height: 20px; */
   padding: .40rem;
   vertical-align: center;
 }
@@ -9943,8 +9943,8 @@ a{
   display: inline-block;
 }
 
-.fb-bg{
-  background: blue;
+.test-bg{
+  background: #ccc;
 }
 
 .todays-bar{
