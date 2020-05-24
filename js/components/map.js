@@ -29,7 +29,7 @@ function draw_map(data, type) {
 
   var map = svg.append("g").attr("class", "states")
 
-  var map_color = {'Confirmed': '#263961', 'Active': '#ffb31a', 'Recovered': '#198256', 'Deaths':'#ad2f23'}
+  var map_color = {'Confirmed': '#0a67ad', 'Active': '#ffb31a', 'Recovered': '#198256', 'Deaths':'#ad2f23'}
 
   var colorRamp = ['#ffffff', map_color[type]];
 

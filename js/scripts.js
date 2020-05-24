@@ -3,15 +3,15 @@
 
 var state_data = []
 // var table_index = {'start_index': 0, 'end_index': 10}
-var table_tmplt = _.template($("#state-table").html());
-var pie_tmplt = _.template($("#pie-script").html());
-var bar_tmplt = _.template($("#bar-script").html());
+var table_tmplt = _.template($('#state-table').html());
+var pie_tmplt = _.template($('#pie-script').html());
+var bar_tmplt = _.template($('#bar-script').html());
 
 function initialize(){
     $.get('/state_wise', function(res){
-      var overview_tmplt = _.template($("#overview-sc").html());
+      var overview_tmplt = _.template($('#overview-sc').html());
       var overview_html = overview_tmplt({ overview: res.response[0]});
-      $("#overview").html(overview_html);
+      $('#overview').html(overview_html);
       state_data = _.orderBy(res.response.splice(1), ['Confirmed'], ['desc'])
       $('.loader').fadeOut('slow')
       $('.wrapper').removeClass('d-none')
@@ -25,23 +25,28 @@ function initialize(){
 }
 
 function renderTable(data){
-  $(".states").empty()
+  $('.states').empty()
   var table_html = table_tmplt({ table_data: data, max_data: data[0] });
-  $(".states").html(table_html);
+  $('.states').html(table_html);
 }
 
 function renderPie(){
-  $("#pie-section").empty()
+  $('#pie-section').empty()
   var pie_html = pie_tmplt();
-  $("#pie-section").html(pie_html);
-  draw_pie("#pie_div1")
-  draw_pie("#pie_div2")
+  $('#pie-section').html(pie_html);
+  $.get('/pie', function(res){
+    res = res.response
+    var pie_data1 = _.pick(res, ['Total Confirmed', 'Total Recovered', 'Total Deceased'])
+    var pie_data2 = _.pick(res, ['Total People Currently in Quarantine', 'Total People Released From Quarantine'])
+    draw_pie(pie_data1, '#pie_div1')
+    draw_pie(pie_data2, '#pie_div2')
+  })
 }
 
 function renderBar(){
-  $("#bar-section").empty()
+  $('#bar-section').empty()
   var bar_html = bar_tmplt();
-  $("#bar-section").html(bar_html);
+  $('#bar-section').html(bar_html);
   $.get('/time_series', function(res){
     res = res.response
     var dataset = _.map(res, (d)=> _.pick(d, ['Month', 'Total Tested', 'Total Confirmed', 'Total Recovered', 'Total Deceased']))

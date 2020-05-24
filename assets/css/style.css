@@ -2067,9 +2067,9 @@ div[data-role="editor-toolbar"] {
 
   color: #fff;
 
-  background: #3b5998;
+  background: #0a67ad;
 
-  background-color : #3b5998;
+  background-color : #0a67ad;
 
 }
 
@@ -9859,7 +9859,7 @@ a{
 }
 
 .facebook-color{
-  color : #3b5998;
+  color : #0a67ad;
 }
 
 .green-color{
@@ -9949,4 +9949,12 @@ a{
 
 .todays-bar{
   font-size: 8px;
+}
+
+.q1-bg{
+  background: #545d5c;
+}
+
+.q2-bg{
+  background: #6c6c04;
 }

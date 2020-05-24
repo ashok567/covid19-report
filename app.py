@@ -22,6 +22,12 @@ class DatewiseHandler(RequestHandler):
         self.write({'response': json.loads(res)})
 
 
+class PieHandler(RequestHandler):
+    def get(self):
+        res = etl.pie_data()
+        self.write({'response': json.loads(res)})
+
+
 settings = dict(
     template_path=os.path.join(os.path.dirname(__file__), 'templates'),
     # static_path=os.path.join(os.path.dirname(__file__), 'static'),
@@ -35,6 +41,7 @@ def make_app():
          (r'/', MainHandler),
          (r'/state_wise', StatewiseHandler),
          (r'/time_series', DatewiseHandler),
+         (r'/pie', PieHandler),
          (r'/(.*)', tornado.web.StaticFileHandler,
           {"path": ""})], **settings)
 

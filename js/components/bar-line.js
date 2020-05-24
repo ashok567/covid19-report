@@ -57,7 +57,7 @@ function draw_bar(data){
       return valueFormat(d[bar])
     })
 
-  line_colors = ['#3b5998', '#d95043', '#26c281']
+  line_colors = ['#0a67ad', '#d95043', '#26c281']
 
   _.each([line1, line2, line3], function(k, i){
     // define the 1st line

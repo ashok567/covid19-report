@@ -1,11 +1,13 @@
 /* exported draw_pie */
-function draw_pie(ele){
+function draw_pie(data, ele){
   var div_width = $(ele).width()
   var width = div_width
       height = 200
       margin = 20
 
   var radius = Math.min(width, height) / 2 - margin
+  if(ele=="#pie_div2") inner_radius = radius - 40
+  else inner_radius = 0
 
   var svg = d3.select(ele)
     .append("svg")
@@ -15,12 +17,12 @@ function draw_pie(ele){
     .append("g")
     .attr("transform", "translate(" + width/2 + "," + height/2 + ")");
 
-  var data = {"within 2 Days ": 1001, "More than 4 days": 212, "Not Entered":223}
-
+  if(ele=="#pie_div2") color_range = ['#545d5c', '#6c6c04']
+  else color_range = ['#0a67ad', '#d95043', '#26c281']
 
   var color = d3.scaleOrdinal()
     .domain(data)
-    .range(['#FCB322', '#26c281', '#d95043']);
+    .range(color_range);
 
   var data_sum = d3.sum(d3.values(data))
 
@@ -32,12 +34,12 @@ function draw_pie(ele){
 
   //Arc
   var arcGenerator = d3.arc()
-    .innerRadius(0)
+    .innerRadius(inner_radius)
     .outerRadius(radius)
 
-  var outerArcGenerator = d3.arc()
-  .innerRadius(radius)
-  .outerRadius(radius)
+  var arcHighlight = d3.arc()
+    .innerRadius(inner_radius)
+    .outerRadius(radius*1.1);
 
   svg
     .selectAll('slices')
@@ -46,10 +48,21 @@ function draw_pie(ele){
     .append('path')
     .attr('d', arcGenerator)
     .attr('class', 'pie')
-    .on('click', (d) => pieOnClick(d.index))
+    .on('mouseover', function(d) {
+      d3.select(this)
+        .transition()
+        .attr('d', arcHighlight(d));
+    })
+    .on('mouseout', function(d) {
+      d3.select(this)
+        .transition()
+        .attr('d', arcGenerator(d));
+    })
     .attr('fill', function(d){ return(color(d.data.key)) })
     .attr("stroke", "#fff")
-    .style("stroke-width", "1px")
+    .style("stroke-width", "1.5px")
+
+  var valueFormat = d3.format(".2s")
 
   // Annotation
   svg
@@ -58,21 +71,11 @@ function draw_pie(ele){
     .enter()
     .append("text")
     .attr('class', 'pie')
-    .on('click', (d) => pieOnClick(d.index))
     .text(function(d){
-      return "("+d.data.value+")"
+      return "("+valueFormat(d.data.value)+")"
     })
     .attr("transform", function(d) { return "translate(" + arcGenerator.centroid(d) + ")";  })
     .style("text-anchor", "middle")
     .style("font-size", 11)
     .style("fill", "#fff")
-}
-
-function pieOnClick(sel_i){
-  _.each([0,1,2], function(i){
-    $(`.line${i}`).addClass('op-0');
-    $(`.point${i}`).addClass('op-0');
-  })
-  $(`.line${sel_i}`).removeClass('op-0');
-  $(`.point${sel_i}`).removeClass('op-0');
 }
