@@ -20,10 +20,13 @@ __pycache__/
 *.xhtml
 
 # Data files. Try not to commit data into the repo
-data/
+app/assets/data/
+app/assets/map/
+app/config.yml
 *.csv
 *.dat
 *.mdb
+*.json
 
 # Zip files that aren't read by Pandas
 *.7z
