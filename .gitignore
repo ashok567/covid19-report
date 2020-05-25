@@ -24,7 +24,6 @@ data/
 *.csv
 *.dat
 *.mdb
-*.json
 
 # Zip files that aren't read by Pandas
 *.7z
