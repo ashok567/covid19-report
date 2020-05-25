@@ -2367,8 +2367,6 @@ div[data-role="editor-toolbar"] {
 
 }
 
-}
-
 .panel.panel-default.panel-heading {
 
   background: #97d3c5;
@@ -8031,8 +8029,6 @@ input:focus:invalid:focus, textarea:focus:invalid:focus, select:focus:invalid:fo
 
   margin:5px 0px;
 
-  width: auto;
-
   color: #00a0df;
 
 }
@@ -9873,8 +9869,5 @@ a{
 }
 
 .q2-bg{
-  background: #6c6c04;
-}
-.sparkline-svg{
-  float: right!important;
+  background: #7B68EE;
 }

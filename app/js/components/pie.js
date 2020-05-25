@@ -17,7 +17,7 @@ function draw_pie(data, ele){
     .append("g")
     .attr("transform", "translate(" + width/2 + "," + height/2 + ")");
 
-  if(ele=="#pie_div2") color_range = ['#545d5c', '#6c6c04']
+  if(ele=="#pie_div2") color_range = ['#545d5c', '#7B68EE']
   else color_range = ['#0a67ad', '#d95043', '#26c281']
 
   var color = d3.scaleOrdinal()
@@ -60,7 +60,7 @@ function draw_pie(data, ele){
     })
     .attr('fill', function(d){ return(color(d.data.key)) })
     .attr("stroke", "#fff")
-    .style("stroke-width", "1.5px")
+    .style("stroke-width", "2px")
 
   var valueFormat = d3.format(".2s")
 

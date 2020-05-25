@@ -56,9 +56,13 @@ function renderBar(){
 function renderSparkLine(){
   $.get('/trendline', function(res){
     res = res.response
-    var dataset = _.map(res, (d)=> _.pick(d, ['Date', 'Daily Confirmed']))
-    console.log(dataset)
-    draw_sparkline(dataset, '#confirmed-spark', '#0a67ad')
+    var data_class = {'Daily Confirmed': '#confirmed-spark',
+    'Daily Recovered': '#recovered-spark',
+    'Daily Deceased': '#fatal-spark'}
+    _.each(data_class, function(ele, col){
+      var dataset = _.map(res, (d)=> _.pick(d, ['Date', col]))
+      draw_sparkline(dataset, ele)
+    })
   })
 }
 

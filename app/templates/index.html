@@ -8,13 +8,12 @@
   <meta name="keyword" content="">
   <link rel="shortcut icon" href="app/assets/img/favicon.png">
 
-  <title>COVID Report</title>
+  <title>COVID Trends</title>
 
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/todc-bootstrap/3.4.0-3.4.1/css/bootstrap-theme.min.css">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
   <link rel="stylesheet" href="app/assets/css/style.css">
-  <!-- <link  rel="stylesheet" href="app/assets/css/style-responsive.css"> -->
 </head>
 
 <body>
@@ -24,7 +23,7 @@
       <img class="loading-image" src="app/assets/img/loader.gif" alt="loading..">
     </div>
     <header class="header dark-bg">
-      <a href="index.html" class="logo">COVID-19 Report</a>
+      <a href="index.html" class="logo">COVID-19 Trends</a>
     </header>
 
     <!--main content start-->
@@ -51,7 +50,9 @@
             <a href="#ind-map">
               <div class="info-box white-bg">
                 <div class="count yellow-color"><%=overview['Active']%></div>
-                <div class="title yellow-color font-italic">Active</div>
+                <div class="row">
+                  <div class="pl-4 m-0 title yellow-color font-italic">Active</div>
+                </div>
               </div>
             </a>
             <!--/.info-box-->
@@ -62,7 +63,10 @@
             <a href="#ind-map">
               <div class="info-box white-bg">
                 <div class="count green-color"><%=overview['Recovered']%><span class="badge green-bg">+<%=overview['Delta_Recovered']%></span></div>
-                <div class="title green-color font-italic">Recovered</div>
+                <div class="row">
+                  <div class="col-7 pl-4 m-0 title green-color font-italic">Recovered</div>
+                  <div class="col-5" id="recovered-spark"></div>
+                </div>
               </div>
             </a>
             <!--/.info-box-->
@@ -73,7 +77,10 @@
             <a href="#ind-map">
               <div class="info-box white-bg">
                 <div class="count red-color"><%=overview['Deaths']%><span class="badge red-bg">+<%=overview['Delta_Deaths']%></span></div>
-                <div class="title red-color font-italic">Fatal</div>
+                <div class="row">
+                  <div class="col-7 pl-4 m-0 title red-color font-italic">Fatal</div>
+                  <div class="col-5" id="fatal-spark"></div>
+                </div>
               </div>
             </a>
             <!--/.info-box-->
