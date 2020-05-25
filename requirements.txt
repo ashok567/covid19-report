@@ -2,3 +2,4 @@ pandas
 tornado
 numpy
 gunicorn
+requests

@@ -7,7 +7,6 @@
 # Ignore byte-compiled / optimised / DLL files
 __pycache__/
 *.py[cod]
-app/config.yml
 
 
 # Ignore SQLite3 files.

@@ -28,9 +28,9 @@ test_response = requests.get(config['statewise_tested_numbers_data'])
 test_data = test_response.content
 test_df = pd.read_csv(BytesIO(test_data), encoding='utf-8')
 reqd_cols = ['Updated On', 'Total Tested',
-                'Positive', 'Negative', 'Unconfirmed',
-                'Total People Currently in Quarantine',
-                'Total People Released From Quarantine']
+             'Positive', 'Negative', 'Unconfirmed',
+             'Total People Currently in Quarantine',
+             'Total People Released From Quarantine']
 test_df = test_df[reqd_cols]
 test_df = test_df.fillna(0)
 test_df['Month'] = test_df['Updated On'].apply(
