@@ -9875,3 +9875,6 @@ a{
 .q2-bg{
   background: #6c6c04;
 }
+.sparkline-svg{
+  float: right!important;
+}

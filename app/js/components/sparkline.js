@@ -3,7 +3,7 @@
 function draw_sparkline(dataset, ele, color){
   var date  = _.keys(dataset[0])[0],
       count  = _.keys(dataset[0])[1]
-  var width = 100;
+  var width = 80;
   var height = 24;
   var x = d3.scaleLinear().range([0, width - 6]);
   var y = d3.scaleLinear().range([height - 6, 0]);
@@ -25,6 +25,8 @@ function draw_sparkline(dataset, ele, color){
 
   var svg = d3.select(ele)
       .append('svg')
+      .attr('class', 'sparkline-svg')
+      .style('float', 'right')
       .attr('width', width)
       .attr('height', height)
       .append('g')
