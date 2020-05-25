@@ -35,7 +35,7 @@ test_df = test_df[reqd_cols]
 test_df = test_df.fillna(0)
 test_df['Month'] = test_df['Updated On'].apply(
     lambda x: dt.datetime.strftime(
-        dt.datetime.strptime(x, '%d/%m/%Y'), '%B'))
+        dt.datetime.strptime(str(x), '%d/%m/%Y'), '%B'))
 test_df = test_df.drop('Updated On', axis=1)
 test_df = test_df.groupby('Month').sum().reset_index()
 

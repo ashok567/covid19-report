@@ -21,7 +21,6 @@ __pycache__/
 
 # Data files. Try not to commit data into the repo
 data/
-assets/img/maps/
 *.csv
 *.dat
 *.mdb
