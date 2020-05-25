@@ -3,4 +3,5 @@ tornado
 numpy
 gunicorn
 requests
-pyyaml
+ruamel-yaml
+PyYAML
