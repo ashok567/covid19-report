@@ -2,7 +2,6 @@
 /* global draw_pie, draw_bar, draw_map, draw_sparkline */
 
 var state_data = []
-// var table_index = {'start_index': 0, 'end_index': 10}
 var table_tmplt = _.template($('#state-table').html());
 var pie_tmplt = _.template($('#pie-script').html());
 var bar_tmplt = _.template($('#bar-script').html());
@@ -15,12 +14,12 @@ function initialize(){
       state_data = _.orderBy(res.response.splice(1), ['Confirmed'], ['desc'])
       $('.loader').fadeOut('slow')
       $('.wrapper').removeClass('d-none')
-      // renderTable(state_data.slice(table_index['start_index'], table_index['end_index']))
       d3.select('body').transition().duration(1000)
+      renderSparkLine()
+      draw_map(state_data, 'Confirmed')
       renderTable(state_data)
       renderPie()
       renderBar()
-      draw_map(state_data, 'Confirmed')
     })
 }
 
@@ -50,8 +49,16 @@ function renderBar(){
   $.get('/time_series', function(res){
     res = res.response
     var dataset = _.map(res, (d)=> _.pick(d, ['Month', 'Total Tested', 'Total Confirmed', 'Total Recovered', 'Total Deceased']))
-    // draw_sparkline(dataset, '#Confirmed-spark', '#3b5998')
     draw_bar(dataset)
+  })
+}
+
+function renderSparkLine(){
+  $.get('/trendline', function(res){
+    res = res.response
+    var dataset = _.map(res, (d)=> _.pick(d, ['Date', 'Daily Confirmed']))
+    console.log(dataset)
+    draw_sparkline(dataset, '#confirmed-spark', '#0a67ad')
   })
 }
 

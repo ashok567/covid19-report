@@ -3,12 +3,12 @@
 function draw_sparkline(dataset, ele, color){
   var date  = _.keys(dataset[0])[0],
       count  = _.keys(dataset[0])[1]
-  var width = 80;
-  var height = 30;
+  var width = 100;
+  var height = 24;
   var x = d3.scaleLinear().range([0, width - 6]);
   var y = d3.scaleLinear().range([height - 6, 0]);
 
-  var parseDate = d3.timeParse("%m");
+  var parseDate = d3.timeParse("%d %B");
 
   dataset.forEach(function(d) {
       d[date] = parseDate(d[date]);
@@ -46,7 +46,7 @@ function draw_sparkline(dataset, ele, color){
       .attr('d', line)
       .attr('fill', 'none')
       .attr('stroke', 'blue')
-      .attr('stroke-width', '5px')
+      .attr('stroke-width', '3px')
       .style('opacity', '0.15')
   svg.append('path')
       .datum(dataset)
@@ -61,5 +61,5 @@ function draw_sparkline(dataset, ele, color){
       .attr('cy', y(dataset[dataset.length-1][count]))
       .attr('r', 3)
       .attr('fill', color)
-      .attr('stroke', '#fff')
+      // .attr('stroke', '#fff')
 }

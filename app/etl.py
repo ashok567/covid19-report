@@ -18,9 +18,11 @@ with open('app/config.yml', 'r') as config_file:
 time_series_response = requests.get(config['case_time_series'])
 time_series_data = time_series_response.content
 daily_df = pd.read_csv(BytesIO(time_series_data), encoding='utf-8')
+daily_df['Date'] = daily_df['Date'].str.strip()
 daily_df['Month'] = daily_df['Date'].apply(
-    lambda x: x.strip().split(' ')[1])
+    lambda x: x.split(' ')[1])
 daily_df = daily_df.fillna(0)
+trend_df = daily_df
 daily_df = daily_df.drop('Date', axis=1)
 daily_df = daily_df.groupby('Month').sum().reset_index()
 
@@ -28,7 +30,6 @@ test_response = requests.get(config['statewise_tested_numbers_data'])
 test_data = test_response.content
 test_df = pd.read_csv(BytesIO(test_data), encoding='utf-8')
 reqd_cols = ['Updated On', 'Total Tested',
-             'Positive', 'Negative', 'Unconfirmed',
              'Total People Currently in Quarantine',
              'Total People Released From Quarantine']
 test_df = test_df[reqd_cols]
@@ -71,3 +72,11 @@ def pie_data():
             'Total People Released From Quarantine']
     pie_df = merged_df[cols].sum()
     return pie_df.to_json(orient='columns')
+
+
+def spark_data():
+    global trend_df
+    cols = ['Date', 'Daily Confirmed', 'Daily Recovered', 'Daily Deceased']
+    trend_df = trend_df[cols]
+    trend_df = trend_df.tail(30)
+    return trend_df.to_json(orient='records')
