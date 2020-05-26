@@ -9856,6 +9856,10 @@ a{
   display: inline-block;
 }
 
+.card-body, .info-box{
+  box-shadow: 0 2px 12px 0 #adadad;
+}
+
 .test-bg{
   background: #ccc;
 }
@@ -9870,4 +9874,8 @@ a{
 
 .q2-bg{
   background: #7B68EE;
+}
+
+.ybaraxis label, .ylineaxis label{
+  font-family: 'Lato', sans-serif;
 }
