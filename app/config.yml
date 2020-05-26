@@ -1,0 +1,9 @@
+url: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSz8Qs1gE_IYpzlkFkCXGcL_BqR8hZieWVi-rphN1gfrO3H4lDtVZs4kd0C3P8Y9lhsT1rhoB-Q_cP4/pub?output=xlsx'
+
+state_wise: 'https://api.covid19india.org/csv/latest/state_wise.csv'
+
+state_wise_daily: 'https://api.covid19india.org/csv/latest/state_wise_daily.csv'
+
+case_time_series: 'https://api.covid19india.org/csv/latest/case_time_series.csv'
+
+statewise_tested_numbers_data: 'https://api.covid19india.org/csv/latest/statewise_tested_numbers_data.csv'
