@@ -46,7 +46,7 @@ def statewise_count():
     data = response.content
     statewise_df = pd.read_csv(BytesIO(data), encoding='utf-8')
     statewise_df = statewise_df.drop(
-        ['Last_Updated_Time', 'State_Notes'], axis=1)
+        ['State_Notes'], axis=1)
     statewise_df['Delta_Total'] = statewise_df['Delta_Confirmed']
     + statewise_df['Delta_Recovered'] + statewise_df['Delta_Deaths']
     statewise_df = statewise_df.to_json(orient='records')

@@ -9,7 +9,8 @@ var bar_tmplt = _.template($('#bar-script').html());
 function initialize(){
     $.get('/state_wise', function(res){
       var overview_tmplt = _.template($('#overview-sc').html());
-      var overview_html = overview_tmplt({ overview: res.response[0]});
+      var total_count = res.response[0]
+      var overview_html = overview_tmplt({ overview: total_count});
       $('#overview').html(overview_html);
       state_data = _.orderBy(res.response.splice(1), ['Confirmed'], ['desc'])
       $('.loader').fadeOut('slow')
@@ -20,6 +21,8 @@ function initialize(){
       renderTable(state_data)
       renderPie()
       renderBar()
+      var last_update_time = total_count['Last_Updated_Time']
+      $('.credits').text(`Last updated on ${last_update_time}`)
     })
 }
 

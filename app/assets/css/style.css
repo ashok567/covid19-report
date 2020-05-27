@@ -1029,7 +1029,7 @@ ul.sidebar-menu li.active a i {
 
 a.logo {
 
-  font-size: 24px;
+  font-size: 20px;
 
   font-weight: 400;
 
@@ -1040,6 +1040,8 @@ a.logo {
   margin-top: 15px;
 
   text-transform: uppercase;
+
+  font-style: italic;
 
 }
 
