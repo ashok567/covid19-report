@@ -7,23 +7,28 @@ var pie_tmplt = _.template($('#pie-script').html());
 var bar_tmplt = _.template($('#bar-script').html());
 
 function initialize(){
-    $.get('/state_wise', function(res){
-      var overview_tmplt = _.template($('#overview-sc').html());
-      var total_count = res.response[0]
-      var overview_html = overview_tmplt({ overview: total_count});
-      $('#overview').html(overview_html);
-      state_data = _.orderBy(res.response.splice(1), ['Confirmed'], ['desc'])
-      $('.loader').fadeOut('slow')
-      $('.wrapper').removeClass('d-none')
-      d3.select('body').transition().duration(1000)
-      renderSparkLine()
-      draw_map(state_data, 'Confirmed')
-      renderTable(state_data)
-      renderPie()
-      renderBar()
-      var last_update_time = total_count['Last_Updated_Time']
-      $('.credits').text(`Last updated on ${last_update_time}`)
-    })
+  console.log(performance.navigation.type)
+  if(performance.navigation.type==0){
+    $('#modal-info').modal('show')
+  }
+  $.get('/state_wise', function(res){
+    var overview_tmplt = _.template($('#overview-sc').html());
+    var total_count = res.response[0]
+    var overview_html = overview_tmplt({ overview: total_count});
+    $('#overview').html(overview_html);
+    state_data = _.filter(res.response.splice(1), (d)=>d.State!='State Unassigned')
+    state_data = _.orderBy(state_data, ['Confirmed'], ['desc'])
+    $('.loader').fadeOut('slow')
+    $('.wrapper').removeClass('d-none')
+    d3.select('body').transition().duration(1000)
+    renderSparkLine()
+    draw_map(state_data, 'Confirmed')
+    renderTable(state_data)
+    renderPie()
+    renderBar()
+    var last_update_time = total_count['Last_Updated_Time']
+    $('.credits').text(`Last updated on ${last_update_time}`)
+  })
 }
 
 function renderTable(data){

@@ -4,7 +4,7 @@ function draw_bar(data){
   var div_width = $('#bar_div').width()
   var margin = {top: 20, right: 40, bottom: 30, left: 50},
       width = div_width - margin.left - margin.right,
-      height = 200 - margin.top - margin.bottom;
+      height = 220 - margin.top - margin.bottom;
 
   // parse the date / time
   var parseTime = d3.timeParse("%m"),
