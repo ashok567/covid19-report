@@ -21,8 +21,8 @@ function initialize(){
     $('.loader').fadeOut('slow')
     $('.wrapper').removeClass('d-none')
     d3.select('body').transition().duration(1000)
-    renderSparkLine()
     draw_map(state_data, 'Confirmed')
+    renderSparkLine()
     renderTable(state_data)
     renderPie()
     renderBar()
@@ -43,7 +43,7 @@ function renderPie(){
   $('#pie-section').html(pie_html);
   $.get('/pie', function(res){
     res = res.response
-    var pie_data1 = _.pick(res, ['Total Confirmed', 'Total Recovered', 'Total Deceased'])
+    var pie_data1 = _.pick(res, ['Positive', 'Negative', 'Unconfirmed'])
     var pie_data2 = _.pick(res, ['Total People Currently in Quarantine', 'Total People Released From Quarantine'])
     draw_pie(pie_data1, '#pie_div1')
     draw_pie(pie_data2, '#pie_div2')
@@ -56,7 +56,7 @@ function renderBar(){
   $('#bar-section').html(bar_html);
   $.get('/time_series', function(res){
     res = res.response
-    var dataset = _.map(res, (d)=> _.pick(d, ['Month', 'Total Tested', 'Total Confirmed', 'Total Recovered', 'Total Deceased']))
+    var dataset = _.map(res, (d)=> _.pick(d, ['Month', 'Total Tested', 'Daily Confirmed', 'Daily Recovered', 'Daily Deceased']))
     draw_bar(dataset)
   })
 }
@@ -65,6 +65,7 @@ function renderSparkLine(){
   $.get('/trendline', function(res){
     res = res.response
     var data_class = {'Daily Confirmed': '#confirmed-spark',
+    'Daily Active': '#active-spark',
     'Daily Recovered': '#recovered-spark',
     'Daily Deceased': '#fatal-spark'}
     _.each(data_class, function(ele, col){

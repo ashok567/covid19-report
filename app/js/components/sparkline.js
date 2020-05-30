@@ -23,7 +23,8 @@ function draw_sparkline(dataset, ele){
   x.domain(d3.extent(dataset, function(d) { return d[date]; }));
   y.domain(d3.extent(dataset, function(d) { return d[count]; }));
 
-  color_list = {'#confirmed-spark': '#0a67ad', '#recovered-spark': '#26c281', '#fatal-spark': '#d95043'}
+  color_list = {'#confirmed-spark': '#0a67ad', '#active-spark': '#fc6',
+  '#recovered-spark': '#26c281', '#fatal-spark': '#d95043'}
 
   var svg = d3.select(ele)
       .append('svg')

@@ -18,7 +18,7 @@ function draw_pie(data, ele){
     .attr("transform", "translate(" + width/2 + "," + height/2 + ")");
 
   if(ele=="#pie_div2") color_range = ['#545d5c', '#7B68EE']
-  else color_range = ['#0a67ad', '#d95043', '#26c281']
+  else color_range = ['#d95043', '#26c281', '#0a67ad']
 
   var color = d3.scaleOrdinal()
     .domain(data)
@@ -60,7 +60,7 @@ function draw_pie(data, ele){
     })
     .attr('fill', function(d){ return(color(d.data.key)) })
     .attr("stroke", "#fff")
-    .style("stroke-width", "2px")
+    .style("stroke-width", "1px")
 
   var valueFormat = d3.format(".2s")
 
@@ -76,6 +76,6 @@ function draw_pie(data, ele){
     })
     .attr("transform", function(d) { return "translate(" + arcGenerator.centroid(d) + ")";  })
     .style("text-anchor", "middle")
-    .style("font-size", 11)
+    .style("font-size", '10px')
     .style("fill", "#fff")
 }
