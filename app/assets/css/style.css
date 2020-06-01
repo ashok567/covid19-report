@@ -327,14 +327,26 @@ a{
   border-radius: 5px !important;
 }
 
-#table-section{
-  height: 500px !important;
+@media (min-width: 640px) {
+  #table-section{
+    height: 500px !important;
+  }
+  .table-responsive{
+    height: 450px;
+    overflow-y: auto;
+  }
 }
 
-#table-section .table-responsive{
-  height: 450px;
-  overflow-y: auto;
+@media (max-width: 640px) {
+  #table-section{
+    height: 400px !important;
+  }
+  .table-responsive{
+    height: 350px;
+    overflow-y: auto;
+  }
 }
+
 
 .table thead th {
   letter-spacing: 0.1px;

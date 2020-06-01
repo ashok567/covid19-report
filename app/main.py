@@ -16,6 +16,13 @@ class StatewiseHandler(RequestHandler):
         self.write({'response': json.loads(res)})
 
 
+class DistrictwiseHandler(RequestHandler):
+    def get(self):
+        state = self.get_argument("state", "")
+        res = etl.districtwise_count(state)
+        self.write({'response': json.loads(res)})
+
+
 class DatewiseHandler(RequestHandler):
     def get(self):
         res = etl.time_series()
@@ -46,16 +53,9 @@ def make_app():
         [
          (r'/', MainHandler),
          (r'/state_wise', StatewiseHandler),
+         (r'/district_wise', DistrictwiseHandler),
          (r'/time_series', DatewiseHandler),
          (r'/pie', PieHandler),
          (r'/trendline', SparkHandler),
          (r'/(.*)', tornado.web.StaticFileHandler,
           {"path": ""})], **settings)
-
-
-# port = 9005
-# if __name__ == '__main__':
-#     print("Server is running at "+str(port))
-#     app = make_app()
-#     app.listen(port)
-#     tornado.ioloop.IOLoop.current().start()

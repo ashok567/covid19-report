@@ -99,7 +99,7 @@
               <div class="d-flex align-items-center justify-content-between">
                 <label class="mb-0 font-weight-bold font-italic">State-Wise Distribution of All Cases</label>
               </div>
-              <div id="ind-map"></div>
+              <div class="mt-3" id="ind-map"></div>
             </div>
           </div>
 
@@ -108,7 +108,7 @@
                 <table class="table">
                   <thead class="font-italic">
                     <tr>
-                      <th>State / UT</th>
+                      <th>Location</th>
                       <th class="facebook-color">Confirmed</th>
                       <th class="yellow-color">Active</th>
                       <th class="green-color">Recovered</th>
@@ -120,7 +120,7 @@
                     <script type="text/html" id="state-table">
                       <% _.each(table_data, function(d){ %>
                       <tr>
-                        <td class="font-italic"><%=d['State']%></td>
+                        <td class="font-italic"><%=d['Location']%></td>
                         <td class="td-bar facebook-color cursor-pointer map-click" id="Confirmed">
                           <div class="progress thin">
                             <div class="progress-bar facebook-bg" role="progressbar" aria-valuenow="<%=(d['Confirmed']/max_data['Confirmed'])*100%>" aria-valuemin="0" aria-valuemax="100" style="width: <%=(d['Confirmed']/max_data['Confirmed'])*100%>%"></div>
@@ -208,11 +208,11 @@
                     <div class="d-flex align-items-center justify-content-center font-italic">
                       <span>
                         <span class="circle-sm q1-bg"></span>
-                        <span class="pl-1">In Quarantine</span>
+                        <span class="pl-1">Quarantined</span>
                       </span>
                       <span class="pl-2">
                         <span class="circle-sm q2-bg"></span>
-                        <span class="pl-1">Released From Quarantine</span>
+                        <span class="pl-1">Released</span>
                       </span>
                     </div>
                   </div>

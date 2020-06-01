@@ -14,6 +14,7 @@ with open('app/config.yml', 'r') as config_file:
 
 # response = requests.get(config['url'])
 state_response = requests.get(config['state_wise'])
+district_response = requests.get(config['district_wise'])
 time_series_response = requests.get(config['case_time_series'])
 test_response = requests.get(config['statewise_tested_numbers_data'])
 
@@ -21,11 +22,27 @@ test_response = requests.get(config['statewise_tested_numbers_data'])
 def statewise_count():
     statewise_data = state_response.content
     statewise_df = pd.read_csv(BytesIO(statewise_data), encoding='utf-8')
+    statewise_df = statewise_df.rename(columns={'State': 'Location'})
     statewise_df = statewise_df.drop(['State_Notes'], axis=1)
     statewise_df['Delta_Total'] = statewise_df['Delta_Confirmed']
     + statewise_df['Delta_Recovered'] + statewise_df['Delta_Deaths']
     statewise_df = statewise_df.to_json(orient='records')
     return statewise_df
+
+
+def districtwise_count(state):
+    districtwise_data = district_response.content
+    districtwise_df = pd.read_csv(BytesIO(districtwise_data), encoding='utf-8')
+    districtwise_df = districtwise_df[
+        districtwise_df['State'] == state.strip()]
+    districtwise_df = districtwise_df.drop(['SlNo', 'District_Notes'], axis=1)
+    districtwise_df = districtwise_df.rename(
+        columns={'Deceased': 'Deaths', 'Delta_Deceased': 'Delta_Deaths',
+                 'District': 'Location'})
+    districtwise_df['Delta_Total'] = districtwise_df['Delta_Confirmed']
+    + districtwise_df['Delta_Recovered'] + districtwise_df['Delta_Deaths']
+    districtwise_df = districtwise_df.to_json(orient='records')
+    return districtwise_df
 
 
 def time_series():

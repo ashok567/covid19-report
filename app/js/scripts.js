@@ -7,7 +7,6 @@ var pie_tmplt = _.template($('#pie-script').html());
 var bar_tmplt = _.template($('#bar-script').html());
 
 function initialize(){
-  console.log(performance.navigation.type)
   if(performance.navigation.type==0){
     $('#modal-info').modal('show')
   }
@@ -16,16 +15,15 @@ function initialize(){
     var total_count = res.response[0]
     var overview_html = overview_tmplt({ overview: total_count});
     $('#overview').html(overview_html);
-    state_data = _.filter(res.response.splice(1), (d)=>d.State!='State Unassigned')
+    state_data = _.filter(res.response.splice(1), (d)=>d.Location!='State Unassigned')
     state_data = _.orderBy(state_data, ['Confirmed'], ['desc'])
     $('.loader').fadeOut('slow')
     $('.wrapper').removeClass('d-none')
-    d3.select('body').transition().duration(1000)
-    draw_map(state_data, 'Confirmed')
     renderSparkLine()
     renderTable(state_data)
     renderPie()
     renderBar()
+    draw_map(state_data, 'India', 'Confirmed')
     var last_update_time = total_count['Last_Updated_Time']
     $('.credits').text(`Last updated on ${last_update_time}`)
   })
@@ -75,6 +73,16 @@ function renderSparkLine(){
   })
 }
 
+function loadDistrict(state){
+  $.get(`/district_wise?state=${state}`, function(res){
+    district_data = _.filter(res.response, (d)=>d.State!='State Unassigned')
+    district_data = _.orderBy(district_data, ['Confirmed'], ['desc'])
+    $(".st_nm_slice").tooltip('hide')
+    draw_map(district_data, state, 'Confirmed')
+    renderTable(district_data)
+  })
+}
+
 function divideTicks(min, max, ticks) {
   var result = []
   var delta = 0
@@ -97,10 +105,10 @@ $('body')
 .on('click', '.map-click', function(){
   var selected_id = $(this).attr('id')
   var map_state_data = _.orderBy(state_data, [selected_id], ['desc'])
-  draw_map(map_state_data, selected_id)
+  draw_map(map_state_data, 'India', selected_id)
 })
 .tooltip({
-  selector: '.map-slice, .barline-slice',
+  selector: '.st_nm_slice, .district_slice, .barline-slice',
   container: 'body',
   html: true,
   animated: 'fade'
