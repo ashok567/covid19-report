@@ -1,12 +1,12 @@
 /* exported draw_pie */
 function draw_pie(data, ele){
-  var div_width = $(ele).width()
-  var width = div_width
-      height = 200
-      margin = 20
+  var div_width = $(ele).width(),
+    width = div_width,
+    margin = 12,
+    height = 220
 
   var radius = Math.min(width, height) / 2 - margin
-  if(ele=="#pie_div2") inner_radius = radius - 40
+  if(ele=="#pie_div2") inner_radius = radius - (margin*3)
   else inner_radius = 0
 
   var svg = d3.select(ele)
@@ -16,7 +16,7 @@ function draw_pie(data, ele){
     .attr("transform", "translate(" + width/2 + "," + height/2 + ")");
 
   if(ele=="#pie_div2") color_range = ['#545d5c', '#7B68EE']
-  else color_range = ['#d95043', '#26c281', '#0a67ad']
+  else color_range = ['#d95043', '#26c281']
 
   var color = d3.scaleOrdinal()
     .domain(data)

@@ -63,12 +63,16 @@ def time_series():
     test_df = test_df.groupby('Updated On').sum().reset_index()
     test_df['Month'] = test_df['Updated On'].apply(
         lambda x: dt.datetime.strftime(
-            dt.datetime.strptime(str(x), '%d/%m/%Y'), '%B'))
+            dt.datetime.strptime(str(x), '%d/%m/%Y'), '%m'))
     test_df = test_df.fillna(0)
     test_df = test_df.drop('Updated On', axis=1)
     test_df = test_df.groupby('Month').max().reset_index()
+    test_df = test_df.sort_values(by='Month')
     test_df['Total Tested'] = test_df['Total Tested'].diff().fillna(
         test_df['Total Tested'])
+    test_df['Month'] = test_df['Month'].apply(
+        lambda x: dt.datetime.strftime(
+            dt.datetime.strptime(str(x), '%m'), '%B'))
 
     merged_df = daily_df.merge(test_df, how='left', on='Month')
     merged_df['Month'] = pd.to_datetime(
@@ -77,6 +81,8 @@ def time_series():
                           'Daily Recovered', 'Daily Deceased']]
     merged_df = merged_df.sort_values(by='Month')
     merged_df = merged_df.fillna(0)
+    merged_df = merged_df[merged_df['Month'] != int(
+        dt.datetime.strftime(dt.datetime.now(), '%m'))]
     merged_df = merged_df.to_json(orient='records')
     return merged_df
 

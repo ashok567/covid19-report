@@ -34,7 +34,7 @@ function draw_map(data, name, type) {
     .data(topojson_var.features)
     .enter().append("path")
     .attr("d", path)
-    .on("click", function(d){ if(name=='india') return loadDistrict(d.properties[prop_name]) })
+    .on("click", function(d){ if(name=='india') return loadDistrict(d.properties[prop_name], type) })
     .transition().duration(500)
     .style("fill", function(d) { return color(mapping.get(d.properties[prop_name]))})
     .attr('data-placement', 'right')

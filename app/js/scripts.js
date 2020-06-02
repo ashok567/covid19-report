@@ -21,9 +21,9 @@ function initialize(){
     $('.wrapper').removeClass('d-none')
     renderSparkLine()
     renderTable(state_data)
-    renderPie()
     renderBar()
     draw_map(state_data, 'India', 'Confirmed')
+    renderPie()
     var last_update_time = total_count['Last_Updated_Time']
     $('.credits').text(`Last updated on ${last_update_time}`)
   })
@@ -41,7 +41,7 @@ function renderPie(){
   $('#pie-section').html(pie_html);
   $.get('/pie', function(res){
     res = res.response
-    var pie_data1 = _.pick(res, ['Positive', 'Negative', 'Unconfirmed'])
+    var pie_data1 = _.pick(res, ['Positive', 'Negative'])
     var pie_data2 = _.pick(res, ['Total People Currently in Quarantine', 'Total People Released From Quarantine'])
     draw_pie(pie_data1, '#pie_div1')
     draw_pie(pie_data2, '#pie_div2')
@@ -73,12 +73,12 @@ function renderSparkLine(){
   })
 }
 
-function loadDistrict(state){
+function loadDistrict(state, type){
   $.get(`/district_wise?state=${state}`, function(res){
-    district_data = _.filter(res.response, (d)=>d.State!='State Unassigned')
-    district_data = _.orderBy(district_data, ['Confirmed'], ['desc'])
+    var district_data = _.filter(res.response, (d)=>d.State!='State Unassigned')
+    district_data = _.orderBy(district_data, [type], ['desc'])
     $(".st_nm_slice").tooltip('hide')
-    draw_map(district_data, state, 'Confirmed')
+    draw_map(district_data, state, type)
     renderTable(district_data)
   })
 }
@@ -102,10 +102,16 @@ $(document).ready(function(){
 })
 
 $('body')
-.on('click', '.map-click', function(){
-  var selected_id = $(this).attr('id')
+.on('click', '.state-click', function(){
+  var selected_id = $(this).attr('id') || 'Confirmed'
   var map_state_data = _.orderBy(state_data, [selected_id], ['desc'])
   draw_map(map_state_data, 'India', selected_id)
+  renderTable(map_state_data)
+})
+.on('click', '.district-click', function(){
+  console.log($(this).closest('tr'))
+  var selected_id = $(this).attr('id') || 'Confirmed'
+  loadDistrict(state, selected_id)
 })
 .tooltip({
   selector: '.st_nm_slice, .district_slice, .barline-slice',
