@@ -3,7 +3,7 @@ function draw_pie(data, ele){
   var div_width = $(ele).width(),
     width = div_width,
     margin = 12,
-    height = 220
+    height = 200
 
   var radius = Math.min(width, height) / 2 - margin
   if(ele=="#pie_div2") inner_radius = radius - (margin*3)

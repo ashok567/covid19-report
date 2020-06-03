@@ -20,7 +20,7 @@ function initialize(){
     $('.loader').fadeOut('slow')
     $('.wrapper').removeClass('d-none')
     renderSparkLine()
-    renderTable(state_data)
+    renderTable(state_data, 'district-level')
     renderBar()
     draw_map(state_data, 'India', 'Confirmed')
     renderPie()
@@ -29,9 +29,9 @@ function initialize(){
   })
 }
 
-function renderTable(data){
+function renderTable(data, next_type){
   $('.states').empty()
-  var table_html = table_tmplt({ table_data: data, max_data: data[0] });
+  var table_html = table_tmplt({ table_data: data, max_data: data[0], next_type: next_type});
   $('.states').html(table_html);
 }
 
@@ -79,7 +79,7 @@ function loadDistrict(state, type){
     district_data = _.orderBy(district_data, [type], ['desc'])
     $(".st_nm_slice").tooltip('hide')
     draw_map(district_data, state, type)
-    renderTable(district_data)
+    renderTable(district_data, 'none')
   })
 }
 
@@ -106,10 +106,10 @@ $('body')
   var selected_id = $(this).attr('id') || 'Confirmed'
   var map_state_data = _.orderBy(state_data, [selected_id], ['desc'])
   draw_map(map_state_data, 'India', selected_id)
-  renderTable(map_state_data)
+  renderTable(map_state_data, 'district-level')
 })
 .on('click', '.district-click', function(){
-  console.log($(this).closest('tr'))
+  var state = $(this).closest('tr').attr('id')
   var selected_id = $(this).attr('id') || 'Confirmed'
   loadDistrict(state, selected_id)
 })
