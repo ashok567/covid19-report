@@ -36,7 +36,8 @@ function draw_bar(data){
     .attr("transform",
           "translate(" + margin.left + "," + margin.top + ")");
 
-  var valueFormat = d3.format(".2s")
+  var valueFormat = d3.format(".2s"),
+  timeFormat = d3.timeFormat('%b')
 
   var rect = svg.selectAll("rect")
   .data(data)
@@ -54,10 +55,10 @@ function draw_bar(data){
     .attr('data-toggle', 'toggle')
     .attr('class', 'barline-slice')
     .attr('data-title', function(d){
-      return valueFormat(d[bar])
+      return `${timeFormat(d[date])} - ${valueFormat(d[bar])}`
     })
 
-  line_colors = ['#0a67ad', '#26c281', '#d95043']
+  var line_colors = ['#0a67ad', '#26c281', '#d95043']
 
   _.each([line1, line2, line3], function(k, i){
     // define the 1st line
@@ -69,6 +70,7 @@ function draw_bar(data){
     svg.append("path")
         .data([data])
         .attr("class", `line${i}`)
+        .transition().ease(d3.easeBounce).duration(700).delay(700)
         .style("stroke", line_colors[i])
         .style("stroke-width", '2px')
         .attr("d", valueline)
@@ -79,6 +81,7 @@ function draw_bar(data){
 
     points.enter().append("circle")
         .attr("class", `point${i}`)
+        .transition().ease(d3.easeBounce).duration(500).delay(500)
         .style("stroke", '#fff')
         .style("stroke-width", "1px")
         .style("fill", line_colors[i])
@@ -89,7 +92,7 @@ function draw_bar(data){
         .attr('data-toggle', 'toggle')
         .attr('class', 'barline-slice')
         .attr('data-title', function(d){
-          return valueFormat(d[k])
+          return `${timeFormat(d[date])} - ${valueFormat(d[k])}`
         })
   })
 
@@ -97,7 +100,7 @@ function draw_bar(data){
   svg.append("g")
     .attr("class", "xaxis")
     .attr("transform", "translate(0," + height + ")")
-    .call(d3.axisBottom(xScale).tickFormat(d3.timeFormat('%b')).tickSize(0).tickPadding(8));
+    .call(d3.axisBottom(xScale).tickFormat(timeFormat).tickSize(0).tickPadding(8));
 
   // Add the Y1 Axis
   var lineTickValues = divideTicks(0, yline_max_val, 4)

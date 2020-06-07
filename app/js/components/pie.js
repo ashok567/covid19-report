@@ -56,9 +56,16 @@ function draw_pie(data, ele){
         .transition()
         .attr('d', arcGenerator(d));
     })
+    .attr('fill', '#fff')
     .attr('fill', function(d){ return(color(d.data.key)) })
     .attr("stroke", "#fff")
     .style("stroke-width", "1px")
+    .attr('data-placement', 'right')
+    .attr('data-toggle', 'toggle')
+    .attr('class', 'pie-slice')
+    .attr('data-title', function(d){
+      return ""
+    })
 
   var valueFormat = d3.format(".2s")
 

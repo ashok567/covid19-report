@@ -312,6 +312,10 @@ a{
   border-right-color: #fff;
 }
 
+.bs-tooltip-left .arrow::before {
+  border-left-color: #fff;
+}
+
 /* scrollbar css */
 ::-webkit-scrollbar {
   width: 5px !important;
@@ -378,7 +382,7 @@ a{
 }
 
 .todays-bar{
-  font-size: 8px;
+  font-size: 7px;
 }
 
 .q1-bg{

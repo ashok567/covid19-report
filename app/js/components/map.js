@@ -35,17 +35,17 @@ function draw_map(data, name, type) {
     .enter().append("path")
     .attr("d", path)
     .on("click", function(d){ if(name=='india') return loadDistrict(d.properties[prop_name], type) })
-    .transition().duration(500)
+    .transition().ease(d3.easeLinear).duration(500).delay(500)
     .style("fill", function(d) { return color(mapping.get(d.properties[prop_name]))})
     .attr('data-placement', 'right')
     .attr('data-toggle', 'toggle')
     .attr('class', `${prop_name}_slice`)
     .attr('data-title', function(d){
       return `<div class="font-italic"><div><span class="pl-1">${d.properties[prop_name].toUpperCase()}</span></div>
-      <div><span class="circle-sm facebook-bg"></span><span class="pl-1">Confirmed: ${_.filter(data, (e) => e.Location==String(d.properties[prop_name]))[0]['Confirmed']}</span></div>
-      <div><span class="circle-sm yellow-bg"></span><span class="pl-1">Active: ${_.filter(data, (e) => e.Location==String(d.properties[prop_name]))[0]['Active']}</span></div>
-      <div><span class="circle-sm green-bg"></span><span class="pl-1">Recovered: ${_.filter(data, (e) => e.Location==String(d.properties[prop_name]))[0]['Recovered']}</span></div>
-      <div><span class="circle-sm red-bg"></span><span class="pl-1">Deaths: ${_.filter(data, (e) => e.Location==String(d.properties[prop_name]))[0]['Deaths']}</span></div></div>`
+      <div><span class="circle-sm facebook-bg"></span><span class="pl-1">Confirmed: ${_.filter(data, (e) => e.Location==String(d.properties[prop_name]))[0]['Confirmed'].toLocaleString()}</span></div>
+      <div><span class="circle-sm yellow-bg"></span><span class="pl-1">Active: ${_.filter(data, (e) => e.Location==String(d.properties[prop_name]))[0]['Active'].toLocaleString()}</span></div>
+      <div><span class="circle-sm green-bg"></span><span class="pl-1">Recovered: ${_.filter(data, (e) => e.Location==String(d.properties[prop_name]))[0]['Recovered'].toLocaleString()}</span></div>
+      <div><span class="circle-sm red-bg"></span><span class="pl-1">Deaths: ${_.filter(data, (e) => e.Location==String(d.properties[prop_name]))[0]['Deaths'].toLocaleString()}</span></div></div>`
     })
   });
 }

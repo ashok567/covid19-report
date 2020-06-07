@@ -34,8 +34,8 @@
           <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 cursor-pointer">
             <div class="info-box white-bg state-click" id="Confirmed">
               <a href="#ind-map">
-                <span class="pl-2 facebook-color"></span>
-                <div class="facebook-color"><span class="count"><%=overview['Confirmed']%></span><span class="badge facebook-bg">+<%=overview['Delta_Confirmed']%></span></div>
+                <span class="pl-2 facebook-color">Total Tests - <span id="total-tests"></span></span>
+                <div class="facebook-color"><span class="count"><%=overview['Confirmed'].toLocaleString()%></span><span class="badge facebook-bg">+<%=overview['Delta_Confirmed']%></span></div>
                 <div class="row">
                   <div class="col-7 pl-4 m-0 title facebook-color font-italic">Confirmed</div>
                   <div class="col-5" id="confirmed-spark"></div>
@@ -49,8 +49,8 @@
           <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 cursor-pointer">
             <div class="info-box white-bg state-click" id="Active">
               <a href="#ind-map">
-                <span class="pl-2 yellow-color"></span>
-                <div class="yellow-color"><span class="count"><%=overview['Active']%></span></div>
+                <span class="pl-2 yellow-color">New Cases - <%=overview['Delta_Confirmed'].toLocaleString()%></span>
+                <div class="yellow-color"><span class="count"><%=overview['Active'].toLocaleString()%></span></div>
                 <div class="row">
                   <div class="col-7 pl-4 m-0 title yellow-color font-italic">Active</div>
                   <div class="col-5" id="active-spark"></div>
@@ -65,7 +65,7 @@
             <div class="info-box white-bg state-click"  id="Recovered">
               <a href="#ind-map">
                 <span class="pl-2 green-color">Recovery Rate ~ <%= parseInt(overview['Recovered']/overview['Confirmed']*100) %>%</span>
-                <div class="green-color"><span class="count"><%=overview['Recovered']%></span><span class="badge green-bg">+<%=overview['Delta_Recovered']%></span></div>
+                <div class="green-color"><span class="count"><%=overview['Recovered'].toLocaleString()%></span><span class="badge green-bg">+<%=overview['Delta_Recovered']%></span></div>
                 <div class="row">
                   <div class="col-7 pl-4 m-0 title green-color font-italic">Recovered</div>
                   <div class="col-5" id="recovered-spark"></div>
@@ -80,9 +80,9 @@
             <div class="info-box white-bg state-click" id="Deaths">
               <a href="#ind-map">
                 <span class="pl-2 red-color">Fatality Rate ~ <%= parseInt(overview['Deaths']/overview['Confirmed']*100) %>%</span>
-                <div class="red-color"><span class="count"><%=overview['Deaths']%></span><span class="badge red-bg">+<%=overview['Delta_Deaths']%></span></div>
+                <div class="red-color"><span class="count"><%=overview['Deaths'].toLocaleString()%></span><span class="badge red-bg">+<%=overview['Delta_Deaths']%></span></div>
                 <div class="row">
-                  <div class="col-7 pl-4 m-0 title red-color font-italic">Fatal</div>
+                  <div class="col-7 pl-4 m-0 title red-color font-italic">Deaths</div>
                   <div class="col-5" id="fatal-spark"></div>
                 </div>
               </a>
@@ -115,7 +115,7 @@
                       <th class="facebook-color">Confirmed</th>
                       <th class="yellow-color">Active</th>
                       <th class="green-color">Recovered</th>
-                      <th class="red-color">Fatal</th>
+                      <th class="red-color">Deaths</th>
                       <th>Today's</th>
                     </tr>
                   </thead>
@@ -124,34 +124,34 @@
                       <% var td_class = next_type=='district-level'?'district-click':'' %>
                       <% _.each(table_data, function(d){ %>
                       <tr id="<%=d['Location']%>">
-                        <td class="font-italic <%=td_class%> cursor-pointer"><%=d['Location']%></td>
+                        <td class="font-italic cursor-pointer"><%=d['Location']%></td>
                         <td class="td-bar facebook-color cursor-pointer <%=td_class%>" id="Confirmed">
                           <div class="progress thin">
                             <div class="progress-bar facebook-bg" role="progressbar" aria-valuenow="<%=(d['Confirmed']/max_data['Confirmed'])*100%>" aria-valuemin="0" aria-valuemax="100" style="width: <%=(d['Confirmed']/max_data['Confirmed'])*100%>%"></div>
                             <div class="progress-bar white-bg" role="progressbar" aria-valuenow="<%=(1-(d['Confirmed']/max_data['Confirmed']))*100%>" aria-valuemin="0" aria-valuemax="100" style="width: <%=(1-(d['Confirmed']/max_data['Confirmed']))*100%>%"></div>
                           </div>
-                          <%=d['Confirmed']%>
+                          <%=d['Confirmed'].toLocaleString()%>
                         </td>
                         <td class="td-bar yellow-color cursor-pointer <%=td_class%>" id="Active">
                           <div class="progress thin">
                             <div class="progress-bar yellow-bg" role="progressbar" aria-valuenow="<%=(d['Active']/max_data['Confirmed'])*100%>" aria-valuemin="0" aria-valuemax="100" style="width: <%=(d['Confirmed']/max_data['Confirmed'])*100%>%"></div>
                             <div class="progress-bar white-bg" role="progressbar" aria-valuenow="<%=(1-(d['Active']/max_data['Confirmed']))*100%>" aria-valuemin="0" aria-valuemax="100" style="width: <%=(1-(d['Confirmed']/max_data['Confirmed']))*100%>%"></div>
                           </div>
-                          <%=d['Active']%>
+                          <%=d['Active'].toLocaleString()%>
                         </td>
                         <td class="td-bar green-color cursor-pointer <%=td_class%>" id="Recovered">
                           <div class="progress thin">
                             <div class="progress-bar green-bg" role="progressbar" aria-valuenow="<%=(d['Confirmed']/max_data['Confirmed'])*100%>" aria-valuemin="0" aria-valuemax="100" style="width: <%=(d['Confirmed']/max_data['Confirmed'])*100%>%"></div>
                             <div class="progress-bar white-bg" role="progressbar" aria-valuenow="<%=(1-(d['Confirmed']/max_data['Confirmed']))*100%>" aria-valuemin="0" aria-valuemax="100" style="width: <%=(1-(d['Confirmed']/max_data['Confirmed']))*100%>%"></div>
                           </div>
-                          <%=d['Recovered']%>
+                          <%=d['Recovered'].toLocaleString()%>
                         </td>
                         <td class="td-bar red-color cursor-pointer <%=td_class%>" id="Deaths">
                           <div class="progress thin">
                             <div class="progress-bar red-bg" role="progressbar" aria-valuenow="<%=(d['Deaths']/max_data['Confirmed'])*100%>" aria-valuemin="0" aria-valuemax="100" style="width: <%=(d['Deaths']/max_data['Confirmed'])*100%>%"></div>
                             <div class="progress-bar white-bg" role="progressbar" aria-valuenow="<%=(1-(d['Deaths']/max_data['Confirmed']))*100%>" aria-valuemin="0" aria-valuemax="100" style="width: <%=(1-(d['Deaths']/max_data['Confirmed']))*100%>%"></div>
                           </div>
-                          <%=d['Deaths']%>
+                          <%=d['Deaths'].toLocaleString()%>
                         </td>
                         <td class="td-bar">
                           <div class="progress thin">
@@ -239,7 +239,7 @@
                     </span>
                     <span class="pl-2">
                       <span class="circle-sm red-bg"></span>
-                      <span class="pl-1">Fatal</span>
+                      <span class="pl-1">Deaths</span>
                     </span>
                   </div>
                 </div>

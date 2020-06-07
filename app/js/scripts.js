@@ -41,10 +41,11 @@ function renderPie(){
   $('#pie-section').html(pie_html);
   $.get('/pie', function(res){
     res = res.response
-    var pie_data1 = _.pick(res, ['Positive', 'Negative'])
-    var pie_data2 = _.pick(res, ['Total People Currently in Quarantine', 'Total People Released From Quarantine'])
+    var pie_data1 = _.pick(res, ['Positive', 'Negative']),
+        pie_data2 = _.pick(res, ['Total People Currently in Quarantine', 'Total People Released From Quarantine'])
     draw_pie(pie_data1, '#pie_div1')
     draw_pie(pie_data2, '#pie_div2')
+    $('#total-tests').text(_.sum(_.map(res).slice(0,3)).toLocaleString())
   })
 }
 
@@ -114,8 +115,9 @@ $('body')
   loadDistrict(state, selected_id)
 })
 .tooltip({
-  selector: '.st_nm_slice, .district_slice, .barline-slice',
+  selector: '.st_nm_slice, .district_slice, .barline-slice, .pie-slice',
   container: 'body',
   html: true,
   animated: 'fade'
+
 });
