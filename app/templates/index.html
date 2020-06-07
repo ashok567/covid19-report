@@ -34,7 +34,7 @@
           <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 cursor-pointer">
             <div class="info-box white-bg state-click" id="Confirmed">
               <a href="#ind-map">
-                <span class="pl-2 facebook-color">Total Tests - <span id="total-tests"></span></span>
+                <span class="pl-2 facebook-color">Tests - <span id="total-tests"></span> (till last month)</span>
                 <div class="facebook-color"><span class="count"><%=overview['Confirmed'].toLocaleString()%></span><span class="badge facebook-bg">+<%=overview['Delta_Confirmed']%></span></div>
                 <div class="row">
                   <div class="col-7 pl-4 m-0 title facebook-color font-italic">Confirmed</div>
@@ -100,7 +100,7 @@
             <div class="card-body pb-0">
               <div class="d-flex align-items-center justify-content-between">
                 <label class="mb-0 font-weight-bold font-italic">State & District Wise Distribution</label>
-                <i class="fa fa-refresh state-click cursor-pointer" aria-hidden="true"></i>
+                <i class="state-click fa fa-refresh cursor-pointer"></i>
               </div>
               <div class="mt-3" id="ind-map"></div>
             </div>
@@ -181,7 +181,7 @@
             <div class="card-body" id="pie-section">
               <script type="text/html" id="pie-script">
                 <div class="d-flex align-items-center justify-content-between">
-                  <label class="mb-0 fs-b fs-12 ls-5 font-weight-bold font-italic">Overall Test Results & Impacts</label>
+                  <label class="mb-0 fs-b fs-12 ls-5 font-weight-bold font-italic">Test Results & Impacts (As of Today)</label>
                 </div>
                 <div class="d-flex align-items-center fs-10 text-color1 fs-i font-italic">
                   <span>Pie: Test Results</span>
@@ -271,43 +271,17 @@
   <div class="modal fade" id="modal-info" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content px-4 pt-2">
-            <div class="modal-header h4 m-0 p-0 py-2">
-                <h5 class="modal-title sm2 d-block clh-22 font-weight-900">Instructions</h5>
+            <div class="modal-header h4 m-0 p-0 py-1">
+                <h5 class="modal-title sm2 d-block clh-22 font-weight-900">Disclaimer & Instructions</h5>
                 <button type="button" class="close" data-style="opacity-100" data-dismiss="modal" aria-label="Close">
                 <img src="app/assets/img/close.png" alt="close icon" />
                 </button>
             </div>
             <div class="modal-body p-0">
-              <table class="table text-center">
-                <thead>
-                  <tr>
-                    <th>States</th>
-                    <th>Confirmed</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>A1</td>
-                    <td>B1</td>
-                  </tr>
-                  <tr>
-                    <td>A1</td>
-                    <td>B1</td>
-                  </tr>
-                  <tr>
-                    <td>A1</td>
-                    <td>B1</td>
-                  </tr>
-                  <tr>
-                    <td>A1</td>
-                    <td>B1</td>
-                  </tr>
-                  <tr>
-                    <td>A1</td>
-                    <td>B1</td>
-                  </tr>
-                </tbody>
-              </table>
+              <p>Data has been curated from below sources and verified by group of volunteers</p>
+              <p><b>State press bulletins, official(CM, Health M) handles, PBI, PTI, ANI reports</b></p>
+              <p><b>This website is not an official source</b> and the numbers may not match with MoH</p>
+              <p>All the data points(cards, map, table-bars, piechart, bar-lines) are clickable</p>
             </div>
         </div>
     </div>

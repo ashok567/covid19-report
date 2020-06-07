@@ -22,7 +22,7 @@ function initialize(){
     renderSparkLine()
     renderTable(state_data, 'district-level')
     renderBar()
-    draw_map(state_data, 'India', 'Confirmed')
+    draw_map(state_data, 'India', 'Active')
     renderPie()
     var last_update_time = total_count['Last_Updated_Time']
     $('.credits').text(`Last updated on ${last_update_time}`)
@@ -45,7 +45,6 @@ function renderPie(){
         pie_data2 = _.pick(res, ['Total People Currently in Quarantine', 'Total People Released From Quarantine'])
     draw_pie(pie_data1, '#pie_div1')
     draw_pie(pie_data2, '#pie_div2')
-    $('#total-tests').text(_.sum(_.map(res).slice(0,3)).toLocaleString())
   })
 }
 
@@ -56,6 +55,7 @@ function renderBar(){
   $.get('/time_series', function(res){
     res = res.response
     var dataset = _.map(res, (d)=> _.pick(d, ['Month', 'Total Tested', 'Daily Confirmed', 'Daily Recovered', 'Daily Deceased']))
+    $('#total-tests').text(_.sum(_.map(dataset, 'Total Tested')).toLocaleString())
     draw_bar(dataset)
   })
 }
@@ -104,14 +104,14 @@ $(document).ready(function(){
 
 $('body')
 .on('click', '.state-click', function(){
-  var selected_id = $(this).attr('id') || 'Confirmed'
+  var selected_id = $(this).attr('id') || 'Active'
   var map_state_data = _.orderBy(state_data, [selected_id], ['desc'])
   draw_map(map_state_data, 'India', selected_id)
   renderTable(map_state_data, 'district-level')
 })
 .on('click', '.district-click', function(){
   var state = $(this).closest('tr').attr('id')
-  var selected_id = $(this).attr('id') || 'Confirmed'
+  var selected_id = $(this).attr('id') || 'Active'
   loadDistrict(state, selected_id)
 })
 .tooltip({

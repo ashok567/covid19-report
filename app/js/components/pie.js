@@ -2,11 +2,11 @@
 function draw_pie(data, ele){
   var div_width = $(ele).width(),
     width = div_width,
-    margin = 12,
-    height = 200
+    margin = 13,
+    height = 220
 
   var radius = Math.min(width, height) / 2 - margin
-  if(ele=="#pie_div2") inner_radius = radius - (margin*3)
+  if(ele=="#pie_div2") inner_radius = radius - (3*margin)
   else inner_radius = 0
 
   var svg = d3.select(ele)
@@ -39,6 +39,8 @@ function draw_pie(data, ele){
     .innerRadius(inner_radius)
     .outerRadius(radius*1.1);
 
+  var valueFormat = d3.format(".2s")
+
   svg
     .selectAll('slices')
     .data(data_ready)
@@ -64,10 +66,8 @@ function draw_pie(data, ele){
     .attr('data-toggle', 'toggle')
     .attr('class', 'pie-slice')
     .attr('data-title', function(d){
-      return ""
+      return `${d.data.key} : ${valueFormat(d.data.value)}`
     })
-
-  var valueFormat = d3.format(".2s")
 
   // Annotation
   svg
@@ -77,10 +77,11 @@ function draw_pie(data, ele){
     .append("text")
     .attr('class', 'pie')
     .text(function(d){
-      return "("+valueFormat(d.data.value)+")"
+      return valueFormat(d.data.value)
     })
     .attr("transform", function(d) { return "translate(" + arcGenerator.centroid(d) + ")";  })
     .style("text-anchor", "middle")
     .style("font-size", '10px')
+    .style("font-weight", "bold")
     .style("fill", "#fff")
 }

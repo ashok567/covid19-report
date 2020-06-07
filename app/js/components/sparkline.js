@@ -63,7 +63,7 @@ function draw_sparkline(dataset, ele){
       .attr('stroke', color_list[ele])
       .attr('stroke-width', '1.5px')
   svg.append('circle')
-      .transition().ease(d3.easeBounce).duration(500).delay(500)
+      .transition().ease(d3.easeBounce).duration(1000).delay(1000)
       .attr('class', 'sparkcircle')
       .attr('cx', x(dataset[dataset.length-1][date]))
       .attr('cy', y(dataset[dataset.length-1][count]))
