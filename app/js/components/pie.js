@@ -62,7 +62,7 @@ function draw_pie(data, ele){
     .attr('fill', function(d){ return(color(d.data.key)) })
     .attr("stroke", "#fff")
     .style("stroke-width", "1px")
-    .attr('data-placement', 'right')
+    .attr('data-placement', 'left')
     .attr('data-toggle', 'toggle')
     .attr('class', 'pie-slice')
     .attr('data-title', function(d){
@@ -84,4 +84,20 @@ function draw_pie(data, ele){
     .style("font-size", '10px')
     .style("font-weight", "bold")
     .style("fill", "#fff")
+    .on('mouseover', function(d) {
+      d3.select(this)
+        .transition()
+        .attr('d', arcHighlight(d));
+    })
+    .on('mouseout', function(d) {
+      d3.select(this)
+        .transition()
+        .attr('d', arcGenerator(d));
+    })
+    .attr('data-placement', 'left')
+    .attr('data-toggle', 'toggle')
+    .attr('class', 'pie-slice')
+    .attr('data-title', function(d){
+      return `${d.data.key} : ${valueFormat(d.data.value)}`
+    })
 }
