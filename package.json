@@ -1,0 +1,31 @@
+{
+  "name": "covid19-trends",
+  "version": "1.0.0",
+  "description": "Latest trends on COVID-19",
+  "main": "script.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ashok567/covid19-report.git"
+  },
+  "keywords": [
+    "covid-19"
+  ],
+  "author": "Ashok Thakur",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ashok567/covid19-report/issues"
+  },
+  "homepage": "https://covid19-trend.herokuapp.com",
+  "dependencies": {
+    "bootstrap": "^4.5.0",
+    "d3": "^5.16.0",
+    "font-awesome": "^4.7.0",
+    "jquery": "^3.5.1",
+    "lodash": "^4.17.15",
+    "popper.js": "^1.16.1",
+    "topojson": "^3.0.2"
+  }
+}
